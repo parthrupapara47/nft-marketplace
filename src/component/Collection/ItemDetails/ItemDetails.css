@@ -1,0 +1,38 @@
+.newitems {
+  padding-bottom: 15px;
+}
+
+.Container span {
+  padding: 10px;
+}
+
+.Container {
+  padding: 20px;
+  padding-left: 60px;
+}
+
+.status {
+  cursor: pointer;
+}
+
+.sort-input {
+  position: absolute;
+  right: 0;
+  padding-right: 30px;
+}
+.search-short {
+  display: flex;
+  padding: 20px;
+  padding-left: 60px;
+}
+
+.search-input input {
+  background: none;
+  color: white;
+  border: none;
+}
+
+.search-input input:focus {
+  border: none;
+  outline: none;
+}

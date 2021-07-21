@@ -1,0 +1,2136 @@
+:root {
+  --page-header-height: 420px;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.dcl.navbar .dcl.navbar-account {
+  position: relative;
+}
+.dcl.navbar .dcl.user-menu .mana:last-child {
+  z-index: 2001;
+  z-index: var(--polygon-mana-z-index);
+}
+.IntroPopupTarget {
+  position: absolute;
+  right: 85px;
+  bottom: 12px;
+}
+.IntroPopupOverlay {
+  z-index: 2000;
+  z-index: var(--intro-dimmer-z-index);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.IntroPopup.ui.popup {
+  max-width: 420px;
+  border-radius: 12px;
+  padding: 24px;
+}
+.IntroPopup.ui.bottom.popup:before,
+.IntroPopup.ui.popup {
+  background-color: #37333d;
+}
+.IntroPopup .ui.header {
+  font-size: 21px;
+  line-height: 30px;
+  margin-bottom: 12px;
+}
+.IntroPopup .content {
+  margin-bottom: 24px;
+}
+@media (max-width: 768px) {
+  .IntroPopup.ui.bottom.center.popup:before {
+    margin-left: 120px;
+  }
+  .IntroPopupTarget {
+    bottom: 8px;
+  }
+}
+.dcl.navbar .ui.menu .item .bell {
+  color: var(--text);
+}
+.dcl.navbar .ui.menu .item.active .bell {
+  color: var(--primary);
+}
+.dcl.navbar .ui.menu .item .bell.pending:after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background-color: var(--primary);
+  position: absolute;
+  border-radius: 100%;
+  top: -5px;
+  right: -5px;
+}
+.dcl.account-wrapper .dcl.mana {
+  flex: none;
+}
+.AtlasPopup {
+  position: absolute;
+  z-index: 100;
+  padding: 20px;
+  background: #000;
+  margin-left: -320px;
+  margin-top: -60px;
+  max-width: 280px;
+  transition: opacity 0.2s ease, top 0.2s ease, left 0.2s ease,
+    margin-left 0.2s ease;
+  border-radius: 8px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+  text-align: left;
+}
+.AtlasPopup.right {
+  margin-left: 40px;
+}
+.AtlasPopup .land-name .name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 600;
+}
+.AtlasPopup .dcl.badge {
+  font-size: 12px;
+  line-height: 13px;
+  padding: 3px 5px;
+  margin-left: 8px;
+  height: 24px;
+  font-weight: 500;
+  flex: none;
+}
+.AtlasPopup .pin {
+  /* background-image: url(/static/media/pin-land.876ed5b7.svg); */
+  width: 17px;
+  height: 16px;
+  background-size: 19px;
+  background-position: -2px -1px;
+}
+.AtlasPopup .dcl.section.medium:last-child {
+  margin-bottom: 0;
+}
+.AtlasPopup .price .dcl.mana {
+  font-size: 14px;
+}
+.AtlasPopup.no-owner .owner {
+  display: none;
+}
+.AtlasPopup.no-owner .land-name {
+  margin-bottom: 0;
+}
+.atlas-wrapper {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.Menu {
+  --menu-item-width: 248px;
+  --menu-sub-item-width: 232px;
+  margin-right: 24px;
+  width: var(--menu-item-width);
+}
+ul.Menu {
+  margin-left: -16px;
+  padding: 0;
+}
+ul.Menu li {
+  font-size: 17px;
+  line-height: 26px;
+  letter-spacing: -0.2;
+  list-style: none;
+  padding: 9px 16px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+ul.Menu li .ui.image {
+  vertical-align: text-bottom;
+}
+ul.Menu li.sub {
+  width: var(--menu-item-width);
+  color: var(--secondary-text);
+}
+ul.Menu li.sub.sub-1 {
+  margin-left: 16px;
+  padding-left: 16px;
+  width: calc(var(--menu-item-width) - 16px);
+}
+ul.Menu li.sub.sub-2 {
+  margin-left: 32px;
+  padding-left: 16px;
+  width: calc(var(--menu-item-width) - 32px);
+}
+.VendorMenu ul.Menu li.sub.sub-1 {
+  margin-left: 0;
+  padding-left: 32px;
+  width: var(--menu-item-width);
+}
+.VendorMenu ul.Menu li.sub.sub-2 {
+  margin-left: 0;
+  padding-left: 48px;
+  width: var(--menu-item-width);
+}
+ul.Menu li .dropdown.icon {
+  float: right;
+}
+ul.Menu li.active,
+ul.Menu li:hover {
+  color: #fff;
+  font-weight: 600;
+  background-color: var(--card);
+}
+ul.Menu li.active {
+  cursor: default;
+}
+ul.Menu ul.submenu {
+  padding-left: 0;
+}
+.MenuItem {
+  display: flex;
+}
+.MenuItem .content {
+  display: inline-block;
+  flex: 1 1 auto;
+  align-self: center;
+  line-height: 24px;
+}
+.MenuItem .ui.image {
+  margin-right: 15px;
+  vertical-align: middle;
+}
+.MenuItem .content .subtitle {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--secondary-text);
+}
+.VendorMenu > .Menu {
+  background-color: none;
+  border: 1px solid #35323b;
+  border-radius: 9px;
+  font-weight: 600;
+}
+.VendorMenu > .Menu .Menu {
+  margin: 0;
+}
+.VendorMenu.active > .Menu {
+  border: none;
+  background-color: var(--card);
+}
+.VendorMenu.disabled .MenuItem {
+  cursor: default;
+}
+.VendorMenu.disabled .MenuItem:hover {
+  background-color: transparent;
+}
+.VendorMenu .MenuItem .ui.image {
+  width: 50px;
+  height: 50px;
+}
+.VendorMenu .MenuItem {
+  margin-bottom: 0;
+}
+.VendorMenu.active > .Menu .MenuItem.active {
+  background-color: #36333c;
+}
+.VendorMenu .MenuItem.vendor-menu-item {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+.NFTSections .MenuItem {
+  border-radius: 8px;
+}
+.VendorMenu .NFTSections .MenuItem {
+  border-radius: 0;
+}
+.VendorMenu .NFTSections > .MenuItem:last-child {
+  border-radius: 0 0 8px 8px;
+}
+.VendorMenu .NFTSections .MenuItem:after {
+  content: "";
+  display: none;
+  /* background-image: url(/static/media/back.eb039d08.svg); */
+  background-repeat: no-repeat;
+  transform: scaleX(-1);
+  width: 8px;
+  height: 14px;
+  top: 6px;
+  position: relative;
+}
+.VendorMenu .NFTSections .MenuItem.active:after,
+.VendorMenu:hover .NFTSections .MenuItem:hover:after {
+  display: inline-block;
+  flex: 1 1 auto;
+}
+.VendorMenu .NFTSections .MenuItem.active .dropdown.icon,
+.VendorMenu:hover .NFTSections .MenuItem:hover .dropdown.icon {
+  display: none;
+}
+.NFTImage {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+.NFTImage .pixel {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.NFTImage .image-wrapper {
+  text-align: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.NFTImage .image {
+  margin: auto;
+  max-height: 100%;
+}
+.NFTImage .rarity-background {
+  width: 100%;
+}
+.NFTImage .ens-subdomain,
+.NFTImage .rarity-background {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.NFTImage .ens-subdomain {
+  font-size: 28px;
+  background-image: url(./style/images/logo_dark.svg);
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-color: #37333d;
+  color: #fff;
+  flex-direction: column;
+}
+.NFTImage .ens-subdomain .name {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 12px 16px 16px;
+}
+.NFTImage .ens-subdomain.small .name {
+  text-overflow: unset;
+  padding: 10px 0;
+  font-size: 60%;
+}
+.NFTImage .ens-subdomain .monospace {
+  font-family: "Inconsolata", monospace;
+  font-size: 17px;
+  line-height: 24px;
+  margin-top: 12px;
+  color: var(--secondary-text);
+  padding: 0 16px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-transform: lowercase;
+}
+.ProximityTag {
+  width: 22px;
+  height: 22px;
+  margin-left: 8px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.ProximityTag.plaza {
+  /* background-image: url(/static/media/plaza.700e917d.svg); */
+}
+.ProximityTag.road {
+  /* background-image: url(/static/media/road.a6e57f94.svg); */
+}
+.ProximityTag.district {
+  /* background-image: url(/static/media/district.f24040e7.svg); */
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .ProximityTag {
+    display: none;
+  }
+}
+.ParcelTags {
+  display: flex;
+}
+.ParcelTags .coords {
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  background-color: #37333d;
+  font-size: 12px;
+  line-height: 14px;
+  color: #fff;
+  padding: 4px 8px;
+}
+.ParcelTags .coords .pin {
+  background-image: url(./style/images/pin-mini.svg);
+  width: 7px;
+  height: 10px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  margin-right: 6px;
+  background-size: contain;
+}
+.EstateTags {
+  display: flex;
+}
+.EstateTags .size {
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  background-color: #37333d;
+  font-size: 12px;
+  line-height: 14px;
+  color: #fff;
+  padding: 4px 8px;
+}
+.WearableTags {
+  display: flex;
+}
+.WearableTags .rarity {
+  font-size: 13px;
+  line-height: 18px;
+  color: #fff;
+  text-transform: uppercase;
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+.WearableTags .icon {
+  margin-left: 8px;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: 16px 16px;
+  width: 24px;
+  height: 24px;
+  background-color: #37333d;
+  border-radius: 4px;
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .WearableTags .icon {
+    display: none;
+  }
+}
+.ENSTags {
+  display: flex;
+}
+.ENSTags .badge {
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  background-color: #37333d;
+  font-size: 13px;
+  text-transform: uppercase;
+  line-height: 14px;
+  color: #fff;
+  padding: 4px 8px;
+}
+.NFTCard {
+  overflow: hidden;
+}
+.NFTCard .dcl.mana.inline,
+.NFTCard .header {
+  font-size: 17px;
+  line-height: 26px;
+  letter-spacing: -0.2px;
+}
+.NFTCard .header .title {
+  flex: 1 2 auto;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-right: 20px;
+}
+.ui.card.NFTCard > .content {
+  flex: none;
+}
+.ui.card.NFTCard > .content > .header:not(.ui),
+.ui.cards > .card.NFTCard > .content > .header:not(.ui) {
+  display: flex;
+  margin-bottom: 6px;
+}
+.NFTCard .dcl.mana.inline {
+  margin: 0;
+  flex: none;
+}
+.ui.card.link .meta,
+.ui.cards > .ui.card.NFTCard.link .meta {
+  margin-bottom: 4px;
+}
+.ui.cards > .ui.card.NFTCard.link:hover .meta,
+a.ui.card.link:hover .meta {
+  color: var(--secondary-text);
+}
+.NFTCard .tags {
+  margin-top: 12px;
+}
+.NFTCard .NFTImage {
+  overflow: hidden;
+}
+.NFTCard .NFTImage .ens-subdomain {
+  background-size: 557px;
+  background-position-y: -133px;
+}
+.NFTCard .NFTImage .ens-subdomain .monospace {
+  margin-top: 0;
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .NFTCard .header {
+    display: flex;
+    flex-direction: column;
+  }
+  .NFTCard .header .title {
+    margin-right: 0;
+  }
+  .NFTCard .dcl.mana.inline {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
+  }
+}
+@media (max-width: 768px) {
+  .NFTCard.ui.card > .content,
+  .ui.cards > .NFTCard.card > .content {
+    display: block;
+  }
+}
+.VendorStrip.Menu {
+  display: flex;
+  width: inherit;
+  margin-left: 0;
+}
+.VendorStrip.Menu .MenuItem {
+  padding: 5px 12px;
+  margin-right: 15px;
+  background-color: var(--card);
+  display: flex;
+  align-items: center;
+}
+.VendorStrip.Menu .MenuItem:not(.active):hover {
+  font-weight: 400;
+}
+.VendorStrip.Menu .MenuItem img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+.VendorStrip.Menu .MenuItem .content {
+  font-size: 12px;
+}
+.Row {
+  display: flex;
+  position: relative;
+  flex-flow: row nowrap;
+  width: 100%;
+}
+.Row > .Column.grow {
+  flex: 1 1 auto;
+}
+.Row > .Column.shrink {
+  flex: 0 0 auto;
+}
+@media (max-width: 768px) {
+  .Row > .Column.right {
+    overflow: hidden;
+  }
+}
+.NFTSidebar > .ui.header.sub {
+  margin-top: 3px;
+  margin-bottom: 22px;
+}
+.PartnerSidebar .go-back {
+  margin-top: 3px;
+  margin-bottom: 21px;
+  display: flex;
+  align-items: center;
+  color: var(--secondary-text);
+  text-transform: uppercase;
+  font-size: 10px;
+  cursor: pointer;
+}
+.PartnerSidebar i.back.icon {
+  /* background-image: url(/static/media/back.eb039d08.svg); */
+  background-repeat: no-repeat;
+  background-size: 6px;
+}
+.Chip,
+.Chip.square {
+  min-width: 10px;
+  min-height: 26px;
+  padding: 3px 11px;
+}
+.Chip.rectangle {
+  min-width: 40px;
+  min-height: 24px;
+}
+.Chip.circle {
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: 20px;
+  padding: 11px;
+  background: var(--dark-two);
+}
+.Chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 4px;
+  background: rgba(var(--bluish-steel-raw), 0.64);
+  color: #fff;
+  display: inline-block;
+}
+.Chip.clickeable:hover {
+  background: var(--bluish-steel);
+}
+.Chip.clickeable {
+  cursor: pointer;
+}
+.Chip.active {
+  color: var(--primary);
+  cursor: default;
+}
+.Chip.active,
+.Chip.active:hover {
+  background: rgba(var(--bluish-steel-raw), 0.32);
+}
+.Chip.disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.Chip.disabled .icon {
+  cursor: default;
+}
+.Chip .icon {
+  vertical-align: middle;
+  line-height: 1;
+  margin-right: 0;
+}
+.Chip .text {
+  font-size: 17px;
+}
+.TextFilter .text-input input {
+  font-size: 17px;
+  line-height: 20px;
+  background: none;
+  color: #fff;
+  font-weight: 600;
+  font-family: var(--font-family);
+  border: none;
+  border-radius: 6px;
+  padding: 6px 6px 6px 36px;
+  outline: none;
+  width: 100%;
+  background-image: url(./style/images/search.svg);
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: 8px;
+}
+.TextFilter .text-input input::-webkit-input-placeholder {
+  color: var(--secondary-text);
+  font-weight: 400;
+}
+.TextFilter .text-input input:-ms-input-placeholder {
+  color: var(--secondary-text);
+  font-weight: 400;
+}
+.TextFilter .text-input input::-ms-input-placeholder {
+  color: var(--secondary-text);
+  font-weight: 400;
+}
+.TextFilter .text-input input::placeholder {
+  color: var(--secondary-text);
+  font-weight: 400;
+}
+@media (max-width: 768px) {
+  .TextFilter {
+    margin-bottom: 4px;
+  }
+  .TextFilter .ui.sub.header.name {
+    font-weight: 400;
+  }
+}
+.ArrayFilter .options {
+  display: flex;
+  flex-flow: wrap;
+}
+.ArrayFilter .options .option {
+  padding: 5px 12px;
+  background-color: #37333d;
+  border-radius: 16px;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+.ArrayFilter .options .option.selected {
+  background-color: var(--primary);
+}
+@media (max-width: 768px) {
+  .ArrayFilter {
+    margin-bottom: 12px;
+  }
+  .ArrayFilter .options .option {
+    font-size: 13px;
+    line-height: 18px;
+    margin-right: 16px;
+    margin-bottom: 16px;
+  }
+  .ArrayFilter .ui.sub.header.name {
+    font-weight: 400;
+  }
+}
+.SelectFilter .ui.dropdown {
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  border: 1px solid var(--divider);
+  border-radius: 6px;
+  color: var(--secondary-text);
+}
+.SelectFilter .ui.dropdown .text {
+  flex: 1 0 auto;
+  color: var(--text);
+}
+.SelectFilter .ui.dropdown .dropdown.icon {
+  color: var(--text);
+}
+@media (max-width: 768px) {
+  .SelectFilter {
+    margin-bottom: 24px;
+    width: 100%;
+  }
+  .SelectFilter .ui.sub.header.name {
+    font-weight: 400;
+  }
+}
+.PriceChangeNotice.ui.card {
+  margin-top: -0.875em;
+  margin-bottom: 30px;
+}
+.PriceChangeNotice.ui.card .meta {
+  display: flex;
+}
+.PriceChangeNotice.ui.card .content .meta .message {
+  flex: 1 1 auto;
+}
+.PriceChangeNotice.ui.card .icon.close {
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .PriceChangeNotice.ui.card {
+    flex: 1 1 auto;
+  }
+}
+.NFTFilters.empty {
+  margin-top: 12px;
+}
+.NFTFilters .topbar {
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+}
+.NFTFilters .topbar .topbar-filter {
+  margin-left: 20px;
+}
+.NFTFilters .topbar > .full-width,
+.NFTFilters .topbar > .TextFilter {
+  flex: 1 0 auto;
+  margin-right: 30px;
+}
+.NFTFilters .topbar > .TextFilter .text-input input {
+  padding-top: 0;
+  font-size: 15px;
+  background-position-y: 4px;
+}
+.NFTFilters .topbar .ui.dropdown {
+  display: flex;
+  line-height: 1;
+}
+.NFTFilters .Filter .ui.sub.header.name {
+  margin-bottom: 12px !important;
+  font-weight: 600;
+}
+.NFTFilters .filters {
+  background-color: var(--card);
+  border-radius: 16px;
+  margin-bottom: 32px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none;
+  padding: 16px 16px 8px;
+  margin-top: -8px;
+}
+.NFTBrowse .filters .Filter + .Filter {
+  margin-top: 14px;
+}
+.NFTFilters .filters .dcl.row {
+  align-items: flex-start;
+}
+.NFTFilters .filters .dcl.row + .dcl.row {
+  margin-top: 12px;
+}
+.NFTFilters .filters .dcl.row .Filter {
+  flex: 1 0 auto;
+}
+.NFTFilters .filters .dcl.row .Filter + .Filter {
+  margin-top: 0;
+  flex: none;
+  width: 50%;
+  margin-left: 24px;
+}
+.NFTFilters .ui.toggle.checkbox.checked input.hidden + label,
+.NFTFilters .ui.toggle.checkbox.checked input.hidden:focus + label,
+.NFTFilters .ui.toggle.checkbox input.hidden + label,
+.NFTFilters .ui.toggle.checkbox input.hidden:focus + label {
+  font-size: 12px;
+  margin-right: 0;
+  padding-left: 33px;
+  line-height: 12px;
+  color: var(--primary) !important;
+}
+.NFTFilters .ui.toggle.checkbox input.hidden + label:before {
+  width: 28px;
+  height: 12px;
+}
+.NFTFilters .ui.toggle.checkbox input.hidden + label:after {
+  background: var(--primary);
+  width: 12px;
+  height: 12px;
+}
+.NFTFilters .ui.dropdown > .text,
+.NFTFilters .ui.toggle.checkbox label {
+  text-transform: uppercase;
+}
+.NFTFilters .filters .ui.dropdown .visible.menu {
+  max-height: 500px;
+  overflow: auto;
+}
+.NFTFilters .open-filters-wrapper {
+  display: flex;
+  position: relative;
+  cursor: pointer;
+}
+.NFTFilters .open-filters-wrapper .label {
+  color: var(--primary);
+  text-transform: uppercase;
+  margin-right: 10px;
+  font-weight: 500;
+}
+.NFTFilters .open-filters {
+  width: 20px;
+  height: 20px;
+  /* background-image: url(/static/media/filters.206aca64.svg); */
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  display: inline-block;
+}
+.NFTFilters .open-filters.active {
+  /* background-image: url(/static/media/filters-active.974bb564.svg); */
+  background-size: 20px;
+}
+.NFTFilters .Chip.grid {
+  border-radius: 4px 0 0 4px;
+}
+.NFTFilters .Chip.atlas {
+  border-radius: 0 4px 4px 0;
+}
+.FiltersModal .NFTSidebar ul.menu li.active,
+.FiltersModal .NFTSidebar ul.menu li:hover {
+  background-color: var(--secondary-on-modal);
+}
+.FiltersModal .filter-row {
+  margin-bottom: 20px;
+}
+.FiltersModal .filter-row .ui.sub.header {
+  margin-bottom: 12px;
+}
+.FiltersModal .NFTSidebar {
+  width: 100%;
+}
+.FiltersModal .NFTSidebar ul.menu,
+.FiltersModal .NFTSidebar ul.menu li {
+  width: calc(100% + 16px);
+}
+.FiltersModal .NFTSidebar ul.menu li.sub {
+  width: 100%;
+}
+.FiltersModal.ui.modal .dcl.close {
+  position: absolute;
+  right: 24px !important;
+  top: 24px !important;
+}
+.FiltersModal .apply-filters {
+  width: 100%;
+  margin-top: 48px;
+}
+.FiltersModal .ui.dropdown {
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  border: 1px solid var(--divider);
+  border-radius: 6px;
+  color: var(--secondary-text);
+}
+.FiltersModal .ui.dropdown .visible.menu {
+  max-height: 500px;
+  overflow: auto;
+}
+.FiltersModal .ui.dropdown .text {
+  flex: 1 0 auto;
+  color: var(--text);
+}
+.FiltersModal .ui.dropdown .dropdown.icon {
+  color: var(--text);
+}
+@media (max-width: 768px) {
+  .NFTFilters .topbar {
+    align-items: normal;
+  }
+  .FiltersModal .dcl.row {
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: stretch;
+  }
+}
+.NFTBrowse .Row .right.Column,
+.NFTBrowse .ui.cards {
+  position: relative;
+}
+.NFTBrowse .ui.cards {
+  min-height: 150px;
+}
+.NFTBrowse .ui.cards + .empty {
+  margin-top: 40px;
+  font-size: 16px;
+  text-align: center;
+  color: var(--secondary-text);
+}
+.NFTBrowse .overlay {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background: var(--background);
+  opacity: 0.6;
+}
+.NFTBrowse .load-more {
+  text-align: center;
+  margin-top: 36px;
+  height: 46px;
+}
+.NFTBrowse .Atlas {
+  min-height: 700px;
+  height: 100%;
+  position: relative;
+}
+.NFTBrowse .Atlas canvas {
+  border-radius: 8px;
+}
+.NFTBrowse .fullscreen-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 48px;
+  height: 48px;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* background-image: url(/static/media/fullscreen.1d4a3b89.svg); */
+  background-position: 50%;
+  background-size: auto;
+  background-repeat: no-repeat;
+  border-radius: 100%;
+  cursor: pointer;
+}
+.NFTBrowse.fullscreen .Atlas canvas {
+  border-radius: 0;
+}
+.NFTBrowse.fullscreen .fullscreen-button {
+  display: none;
+}
+.NFTBrowse .topbar {
+  margin-bottom: 24px;
+}
+.Column .topbar {
+  margin-bottom: 24px;
+}
+.NFTBrowse.fullscreen .Atlas,
+.NFTBrowse.fullscreen > .Row,
+.NFTBrowse.fullscreen > .Row > .Column {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: auto;
+  margin-top: 0;
+}
+.NFTBrowse.fullscreen .blur-background {
+  position: relative;
+  background: rgba(22, 20, 26, 0.75);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  z-index: 1;
+}
+.NFTBrowse.fullscreen .NFTFilters {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.NFTBrowse.fullscreen .NFTFilters .topbar {
+  margin-bottom: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.NFTBrowse.fullscreen .NFTFilters .TextFilter {
+  margin-bottom: 0;
+}
+.NFTBrowse.fullscreen .NFTFilters .TextFilter input {
+  padding-bottom: 0;
+}
+.NFTBrowse.fullscreen .NFTFilters .TextFilter input::-webkit-input-placeholder {
+  color: var(--text);
+  opacity: 0.5;
+}
+.NFTBrowse.fullscreen .NFTFilters .TextFilter input:-ms-input-placeholder {
+  color: var(--text);
+  opacity: 0.5;
+}
+.NFTBrowse.fullscreen .NFTFilters .TextFilter input::-ms-input-placeholder {
+  color: var(--text);
+  opacity: 0.5;
+}
+.NFTBrowse.fullscreen .NFTFilters .TextFilter input::placeholder {
+  color: var(--text);
+  opacity: 0.5;
+}
+@media (max-width: 768px) {
+  .NFTBrowse .Layout .right.column > div {
+    width: 100%;
+  }
+  .NFTBrowse .NFTSidebar ul.menu li {
+    width: calc(100% - 32px);
+  }
+  .NFTBrowse .NFTFilters .topbar {
+    align-items: center;
+  }
+}
+.PageHeader {
+  height: var(--page-header-height);
+  margin-bottom: 35px;
+}
+.AccountPage .PageHeader {
+  display: flex;
+  align-items: center;
+  background-color: var(--card);
+}
+.AccountPage .PageHeader > div {
+  margin: auto;
+  text-align: center;
+}
+.AccountPage ul.Menu {
+  margin-top: 0;
+}
+.AccountPage .blockie-address {
+  margin-top: 16px;
+  font-size: 17px;
+}
+.AccountPage .profile-name {
+  margin-top: 12px;
+  font-weight: 600;
+  font-size: 18px;
+}
+.SignInPage {
+  display: flex;
+  justify-content: center;
+}
+.SignInPage .SignIn.center {
+  position: relative;
+}
+.Authorization > .field {
+  margin-bottom: 41px !important;
+}
+.Authorization .ui.checkbox input.hidden + label {
+  font-weight: 700;
+  font-size: 17px;
+  padding-left: 35px;
+}
+.Authorization .is-pending .ui.checkbox label:after,
+.Authorization .is-pending .ui.checkbox label:before {
+  display: none;
+}
+.Authorization .radio-description {
+  font-size: 15px;
+  margin-left: 35px;
+  margin-top: 5px;
+}
+.Authorization .is-pending .loader-tooltip {
+  display: inline;
+  position: relative;
+}
+.Authorization .loader-tooltip {
+  display: none;
+}
+.Authorization .ui.loader {
+  left: 7px;
+  top: 2px;
+  float: left;
+}
+.Authorization .ui.mini.loader:after,
+.Authorization .ui.mini.loader:before {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+.Authorization .ui.checkbox input.hidden + label,
+.Authorization .ui.checkbox input.hidden:active + label,
+.Authorization .ui.checkbox input.hidden:focus + label {
+  font-weight: 700;
+  font-size: 17px;
+  padding-left: 35px;
+}
+@media (max-width: 768px) {
+  .Authorization .ui.radio.checkbox {
+    margin-bottom: 0;
+  }
+  .Authorization .ui.loader {
+    top: 8px;
+  }
+}
+.SettingsPage .left-column {
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 600;
+}
+.SettingsPage .row {
+  margin-bottom: 70px;
+}
+.SettingsPage .dcl.blockie {
+  margin-right: 24px;
+  float: left;
+}
+.SettingsPage .address-container {
+  margin-top: 7px;
+  float: left;
+}
+.SettingsPage .address {
+  margin-bottom: 8px;
+  font-size: 21px;
+}
+.SettingsPage .copy-text,
+.SettingsPage .link {
+  color: var(--primary);
+}
+.SettingsPage .link {
+  cursor: pointer;
+}
+.SettingsPage .balance {
+  display: flex;
+  align-items: center;
+}
+.SettingsPage .dcl.mana {
+  font-size: 21px;
+  margin-bottom: 0;
+}
+.SettingsPage .buy-more {
+  margin-left: 24px;
+}
+.SettingsPage .authorization-checks > label {
+  display: block;
+  font-size: 17px;
+  margin-bottom: 17px;
+  text-transform: capitalize;
+}
+@media (max-width: 992px) {
+  .SettingsPage .ui.grid > .row {
+    flex-direction: column;
+    margin-bottom: 48px;
+  }
+  .SettingsPage .ui.grid > .row > .column:first-child {
+    margin-bottom: 16px;
+  }
+  .SettingsPage .blockie-container {
+    width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .SettingsPage .address-container {
+    margin-top: 24px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .SettingsPage .address-container .address {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+.nft-center {
+  position: relative;
+  top: 100px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 350px);
+}
+.Title {
+  margin-top: 35px;
+}
+.Title .left .ui.large.header {
+  margin-bottom: 0;
+  margin-right: 10px;
+}
+.Title .Column.left .ui.header > .text {
+  display: flex;
+}
+.Title .Badge {
+  margin-left: 16px;
+  margin-top: 6px;
+}
+@media (max-width: 768px) {
+  .Title .left {
+    margin-right: 0;
+    margin-bottom: 24px;
+  }
+}
+.Owner > a {
+  display: flex;
+  align-items: center;
+}
+.Owner label {
+  text-transform: uppercase;
+  color: var(--secondary-text);
+  margin-right: 20px;
+}
+@media (max-width: 768px) {
+  .Owner > a {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .Owner label {
+    margin-right: 0;
+    margin-bottom: 12px;
+    font-size: 13px;
+    line-height: 18px;
+  }
+}
+.Badge {
+  font-size: 13px;
+  line-height: 18px;
+  border-radius: 5px;
+  padding: 7px 12px;
+  font-weight: 600;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  cursor: default;
+}
+.Badge a {
+  line-height: 22px;
+}
+.Description .description-text {
+  font-size: 17px;
+  line-height: 26px;
+  letter-spacing: 0.2px;
+}
+.Highlights > .ui.header,
+.Highlights > .ui.sub.header {
+  margin-bottom: 13px;
+}
+@media (min-width: 768px) {
+  .Highlights .Highlight + .Highlight {
+    margin-left: 64px;
+  }
+}
+@media (max-width: 768px) {
+  .Highlights > .Row {
+    flex-direction: column;
+  }
+  .Highlights .Highlight + .Highlight {
+    margin-top: 24px;
+  }
+}
+.Highlight.clickable {
+  cursor: pointer;
+}
+.Highlight .left {
+  width: 48px;
+  height: 48px;
+  background-color: #37333d;
+  border-radius: 8px;
+}
+.Highlight .right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 12px;
+}
+.Highlight .name {
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 600;
+}
+.Highlight .description {
+  font-size: 15px;
+  line-height: 24px;
+  color: var(--secondary-text);
+}
+.Highlight .left > div {
+  width: 100%;
+  height: 100%;
+}
+.TransactionHistory {
+  position: relative;
+}
+.TransactionHistory .mobile-tx-history {
+  margin-top: 16px;
+  margin-bottom: 96px;
+  font-size: 15px;
+}
+.TransactionHistory .mobile-tx-history-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.TransactionHistory .mobile-tx-history-row .when {
+  color: var(--secondary-text);
+}
+.WarningMessage {
+  padding: 16px;
+  color: var(--danger);
+  text-align: center;
+  border-top: 1px solid var(--divider);
+}
+.Bid {
+  position: relative;
+  flex-direction: column;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--card);
+  margin-bottom: 20px;
+}
+.Bid,
+.Bid .bid-row {
+  display: flex;
+}
+.Bid .image {
+  flex: none;
+  height: 96px;
+  width: 96px;
+  position: relative;
+}
+.Bid .wrapper {
+  flex: 1 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+}
+.Bid .wrapper .info {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.Bid .wrapper .info .dcl.stats {
+  width: 20%;
+}
+.Bid .wrapper .info .dcl.stats.from {
+  width: 30%;
+}
+.Bid .wrapper .info .dcl.stats .ui.header {
+  white-space: nowrap;
+}
+.Bid .wrapper .info .dcl.stats + .dcl.stats {
+  margin-left: 48px;
+}
+.Bid .wrapper .info .dcl.stats .ui.header:not(.sub) {
+  font-size: 17px;
+  line-height: 26px;
+}
+.Bid .wrapper .info .dcl.stats .ui.header.sub {
+  font-size: 13px;
+  line-height: 18px;
+}
+.Bid .wrapper .info .dcl.stats .Profile {
+  font-size: 17px;
+  line-height: 26px;
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+}
+.Bid .wrapper .info .dcl.stats .Profile .name {
+  color: var(--text);
+}
+.Bid .actions {
+  flex: none;
+  margin-left: 48px;
+}
+.Bid .actions .ui.button:not(.primary) {
+  background-color: transparent;
+  border: 2px solid var(--secondary-on-modal);
+}
+.Bid .actions .ui.button {
+  width: 146px;
+}
+.Bid .actions .AcceptButton {
+  display: inline-block;
+  height: 48px;
+}
+.Bid .actions .AcceptButton + .ui.button,
+.Bid .actions .ui.button + .ui.button {
+  margin-left: 16px;
+}
+@media (max-width: 768px) {
+  .Bid {
+    height: auto;
+  }
+  .Bid .bid-row {
+    flex-direction: column;
+  }
+  .Bid .image {
+    width: 100%;
+    height: auto;
+  }
+  .Bid .info,
+  .Bid .wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .Bid .wrapper .info .dcl.stats,
+  .Bid .wrapper .info .dcl.stats.from {
+    width: 100%;
+  }
+  .Bid .wrapper .info .dcl.stats + .dcl.stats {
+    margin-left: 0;
+  }
+  .Bid .actions {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0;
+    width: 100%;
+  }
+  .Bid .actions .ui.button {
+    width: 100%;
+  }
+  .Bid .actions .AcceptButton + .ui.button,
+  .Bid .actions .ui.button + .ui.button {
+    margin-top: 12px;
+    margin-left: 0;
+  }
+}
+.Bids .list {
+  margin-top: 13px;
+}
+.ParcelDetail .pin {
+  background-image: url(./style/images/pin.svg);
+  width: 12px;
+  height: 14px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  margin-right: 4px;
+}
+.ParcelDetail .jump-in-icon {
+  background: url(./style/images/jump_in.svg);
+  background-size: 16px 16px;
+  width: 16px;
+  height: 16px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  margin-left: 6px;
+}
+.ParcelDetail .Badge a {
+  color: var(--text);
+  display: flex;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .ParcelDetail .jump-in-badge {
+    display: none;
+  }
+}
+.EstateDetail .jump-in-icon {
+  /* background: url(/static/media/jump_in.6a649af1.svg); */
+  background-size: 16px 16px;
+  width: 16px;
+  height: 16px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  margin-left: 6px;
+}
+.EstateDetail .Badge a {
+  color: var(--text);
+  display: flex;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .EstateDetail .jump-in-badge {
+    display: none;
+  }
+}
+.WearableDetail .PageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.WearableDetail .Highlight .left > div {
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+}
+.WearableDetail .rarity {
+  font-size: 13px;
+  line-height: 18px;
+  border-radius: 5px;
+  padding: 7px 12px;
+  font-weight: 600;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  cursor: default;
+  margin-left: 16px;
+  margin-top: 6px;
+  cursor: pointer;
+}
+.NFTPage .NFTImage .pixel {
+  display: none;
+}
+.NFTPage .NFTImage .ens-subdomain {
+  font-size: 64px;
+  background-size: 2016px;
+}
+.NFTPage .NFTImage .ens-subdomain .name {
+  padding: 25px;
+}
+.NFTPage .ui.container > div {
+  margin-bottom: 48px;
+}
+@media (max-width: 768px) {
+  .NFTPage .ui.container > .Row {
+    flex-direction: column;
+  }
+  .NFTPage .ui.container > .Row .dcl.stats,
+  .NFTPage .ui.container > .Row .ui.button {
+    width: 100%;
+  }
+  .NFTPage .ui.container > .Row .ui.button {
+    margin-left: 0;
+    margin-top: 24px;
+  }
+}
+.wallet-center {
+  position: relative;
+  top: 100px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 350px);
+}
+.NFTAction .back {
+  /* background-image: url(/static/media/back.eb039d08.svg); */
+  background-repeat: no-repeat;
+  background-position-x: 10px;
+  background-position-y: 9px;
+  width: 32px;
+  height: 32px;
+  border-radius: 100%;
+  border: 1px solid rgba(115, 110, 125, 0.4);
+  background-size: 7px;
+  margin-top: 5vh;
+  margin-bottom: 10vh;
+  cursor: pointer;
+  margin-left: 2px;
+}
+.NFTAction .back:hover {
+  border: 1px solid hsla(0, 0%, 100%, 0.5);
+}
+.NFTAction .Row .left {
+  flex: 0.75 1 auto;
+  text-align: right;
+  margin-right: 80px;
+}
+.NFTAction .Row .right {
+  flex: 1.25 1 auto;
+}
+.NFTAction .nft-image-wrapper {
+  width: 240px;
+  border-radius: 16px;
+  overflow: hidden;
+  display: inline-block;
+}
+@media (max-width: 768px) {
+  .NFTAction > .Row {
+    flex-direction: column;
+  }
+  .NFTAction > .Row .Column.left,
+  .NFTAction > .Row .nft-image-wrapper,
+  .NFTAction > .Row .ui.button {
+    width: 100%;
+  }
+  .NFTAction > .Row .buttons {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .NFTAction > .Row .nft-image-wrapper,
+  .NFTAction > .Row .ui.button + .ui.button {
+    margin-left: 0;
+    margin-bottom: 24px;
+  }
+}
+.dcl.field .ManaField.ui.input input,
+.ui.form .dcl.field .ManaField.ui.input input {
+  padding-left: 36px !important;
+}
+.ManaField .dcl.mana.ui.header {
+  position: absolute;
+  left: 8px;
+  bottom: 12px;
+  margin-bottom: 0;
+}
+.SellPage .ui.header {
+  margin-bottom: 8px;
+}
+.SellPage .subtitle {
+  margin-bottom: 32px;
+}
+.SellPage .form-fields {
+  max-width: 420px;
+  margin-bottom: 20px;
+}
+.ConfirmPriceModal .dcl.field .ui.sub.header {
+  margin-top: 24px;
+}
+@media (max-width: 768px) {
+  .ConfirmPriceModal .dcl.field,
+  .SellPage .dcl.field {
+    width: 100%;
+    min-width: auto;
+  }
+}
+.BuyPage .ui.header {
+  margin-bottom: 8px;
+}
+.BuyPage .buttons {
+  margin-top: 32px;
+}
+.BuyPage .error {
+  color: var(--danger);
+}
+.BidPage .ui.header {
+  margin-bottom: 8px;
+}
+.BidPage .subtitle {
+  margin-bottom: 32px;
+}
+.BidPage .form-fields {
+  max-width: 420px;
+  margin-bottom: 20px;
+}
+.BidPage .fields .dcl.field {
+  margin-bottom: 8px;
+}
+@media (max-width: 768px) {
+  .BidPage .dcl.field {
+    min-width: auto;
+  }
+}
+.CancelSalePage .ui.header {
+  margin-bottom: 8px;
+}
+.CancelSalePage .subtitle {
+  margin-bottom: 32px;
+}
+.TransferPage .ui.header {
+  margin-bottom: 8px;
+}
+.TransferPage .subtitle {
+  margin-bottom: 32px;
+}
+.TransferPage .subtitle.error {
+  color: var(--danger);
+}
+.TransferPage .warning {
+  color: var(--danger);
+  margin-bottom: 24px;
+}
+.TransferPage .message {
+  font-family: var(--font-family);
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+.TransferPage .form-fields {
+  width: 420px;
+}
+.TransactionDetail {
+  margin-bottom: 24px;
+}
+.TransactionDetail .left {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.TransactionDetail .right {
+  display: flex;
+  align-items: center;
+  flex: none;
+  margin-left: 16px;
+}
+.TransactionDetail .left div.image {
+  width: 48px;
+  height: 48px;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  flex: none;
+  margin-right: 16px;
+}
+.TransactionDetail .left .image .dcl.mana {
+  font-size: 48px;
+  height: 48px;
+  padding-top: 10px;
+  margin-left: 2px;
+  margin-top: -2px;
+  display: flex;
+}
+.TransactionDetail .left .image .dcl.mana .matic {
+  width: 41px;
+  background-repeat: no-repeat;
+  margin-top: -9px;
+  margin-left: 1px;
+}
+.TransactionDetail .left .text {
+  display: flex;
+  align-items: baseline;
+  overflow: hidden;
+}
+.TransactionDetail .left .text .description {
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.TransactionDetail .left .description .dcl.blockie {
+  margin-left: 3px;
+}
+.TransactionDetail .left .text .timestamp {
+  color: var(--secondary-text);
+  margin-left: 8px;
+}
+.TransactionDetail .right .status {
+  display: flex;
+  color: var(--secondary-text);
+}
+.TransactionDetail .right .status .description {
+  text-transform: capitalize;
+}
+.TransactionDetail .right .status .description + * {
+  margin-left: 8px;
+}
+.TransactionDetail .right .status.confirmed,
+.TransactionDetail .right .status.replaced {
+  color: var(--neon-blue);
+}
+.TransactionDetail .right .status.reverted {
+  color: var(--danger);
+}
+.TransactionDetail .right .status .spinner {
+  position: relative;
+  width: 20px;
+  height: 16px;
+  margin-top: 3px;
+}
+@media (max-width: 768px) {
+  .TransactionDetail .left .text .timestamp,
+  .TransactionDetail .right .status .description {
+    display: none;
+  }
+}
+.ActivityPage .center {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ActivityPage .ui.basic.button {
+  padding: 0;
+}
+.ActivityPage .center p {
+  color: var(--secondary-text);
+}
+.ActivityPage .transactions {
+  margin-top: 20px;
+}
+.PartnersSidebar {
+  padding-top: 10px;
+}
+.PartnersSidebar ul.Menu {
+  margin-top: 30px;
+}
+.Slideshow {
+  margin-bottom: 70px;
+  width: 100%;
+}
+.Slideshow .nfts {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: auto;
+  position: relative;
+  min-height: 336px;
+}
+.Slideshow .nfts .NFTCard,
+.Slideshow .nfts .ui.card.NFTCard:first-child {
+  flex: 0 0 auto;
+  width: 220px;
+  margin-right: 20px;
+  height: 300px;
+  margin-top: 12px;
+}
+.Slideshow .dcl.header-menu {
+  margin-bottom: 12px;
+}
+.Slideshow i.caret {
+  /* background-image: url(/static/media/forward.23cadc1b.svg); */
+  background-size: contain;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 16px;
+  height: 13px;
+  margin-left: 4px;
+}
+.Slideshow .ui.button.basic {
+  display: flex;
+  align-items: center;
+}
+.PartnersPage .Layout {
+  display: flex;
+}
+.PartnersPage .Layout .column {
+  height: 100%;
+}
+.PartnersPage .Row > .Column.right {
+  overflow: hidden;
+}
+.PartnersPage .Layout .Column.right > div {
+  align-self: start;
+}
+.HomePageHero.dcl.hero {
+  height: var(--page-header-height);
+}
+.HomePageHero .hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-image: url(./style/images/hero.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.HomePageHero.dcl.hero .ui.header.hero-subtitle {
+  margin-bottom: 24px;
+  color: var(--secondary-text);
+}
+.MyBidsPage .center {
+  position: relative;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary-text);
+  margin-bottom: 20px;
+}
+.MyBidsPage .bids {
+  margin-bottom: 48px;
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .MyBidsPage .Bid .image {
+    display: none;
+  }
+  .Bid .wrapper .info .dcl.stats.from {
+    width: 35%;
+  }
+  .MyBidsPage .Bid .actions {
+    margin-left: 10px;
+  }
+  .MyBidsPage .Bid .actions .ui.button {
+    width: 116px;
+    min-width: 116px;
+  }
+}
+.ui.inverted.primary.button:focus {
+  color: var(--primary);
+  background-color: transparent;
+}
+.ui.loading.button:after {
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+  border-top-color: var(--primary);
+}
+.ui.button + .ui.button {
+  margin-left: 16px;
+}
+.ui.cards a.card:hover,
+.ui.link.card:hover,
+.ui.link.cards .card:hover,
+a.ui.card:hover {
+  background-color: var(--card);
+}
+.dcl.tabs a {
+  color: var(--text);
+}
+.ui.form .dcl.field .ui.input input {
+  color: var(--text);
+  background: transparent;
+}
+.ui.radio.checkbox .box:before,
+.ui.radio.checkbox label:before {
+  width: 26px;
+  height: 26px;
+}
+.ui.radio.checkbox.checked input.hidden + label:after {
+  top: 0;
+  left: -1px;
+  width: 29px;
+  height: 32px;
+}
+.ui.inverted.popup,
+.ui.popup {
+  height: auto;
+}
+:root {
+  --page-header-height: 420px;
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+.danger-text {
+  color: var(--danger);
+}
+@media (max-width: 768px) {
+  .dcl.navbar.overlay .ui.container {
+    width: calc(100% - 32px) !important;
+  }
+  .ui.modal .actions {
+    flex-direction: column-reverse;
+  }
+  .ui.modal .actions .ui.button + .ui.button {
+    margin-left: 0;
+  }
+}
+
+.WearableTags .icon.body_shape {
+  background-image: url(./style/images/wearables/BodyShapeIcon.svg);
+}
+
+.WearableTags .icon.earring {
+  background-image: url(./style/images/wearables/EarringsIcon.svg);
+}
+
+.WearableTags .icon.eyebrows {
+  background-image: url(./style/images/wearables/EyebrowIcon.svg);
+}
+
+.WearableTags .icon.eyes {
+  background-image: url(./style/images/wearables/EyesIcon.svg);
+}
+
+.WearableTags .icon.eyewear {
+  background-image: url(./style/images/wearables/EyewearIcon.svg);
+}
+
+.WearableTags .icon.facial_hair {
+  background-image: url(./style/images/wearables/FacilHairIcon.svg);
+}
+
+.WearableTags .icon.feet {
+  background-image: url(./style/images/wearables/FeetIcon.svg);
+}
+
+.WearableTags .icon.hair {
+  background-image: url(./style/images/wearables/HairIcon.svg);
+}
+
+.WearableTags .icon.hat {
+  background-image: url(./style/images/wearables/HatIcon.svg);
+}
+
+.WearableTags .icon.helmet {
+  background-image: url(./style/images/wearables/HelmetIcon.svg);
+}
+
+.WearableTags .icon.lower_body {
+  background-image: url(./style/images/wearables/LowerBodyIcon.svg);
+}
+
+.WearableTags .icon.mask {
+  background-image: url(./style/images/wearables/MaskIcon.svg);
+}
+
+.WearableTags .icon.mouth {
+  background-image: url(./style/images/wearables/MouthIcon.svg);
+}
+
+.WearableTags .icon.tiara {
+  background-image: url(./style/images/wearables/TiaraIcon.svg);
+}
+
+.WearableTags .icon.top_head {
+  background-image: url(./style/images/wearables/TopHeadIcon.svg);
+}
+
+.WearableTags .icon.upper_body {
+  background-image: url(./style/images/wearables/UpperBodyIcon.svg);
+}
+
+.WearableTags .icon.BaseMale {
+  background-image: url(./style/images/wearables/MaleIcon.svg);
+  background-size: 14px 14px;
+}
+
+.WearableTags .icon.BaseFemale {
+  background-image: url(./style/images/wearables/FemaleIcon.svg);
+  background-size: 14px 14px;
+}
+
+.WearableTags .icon.Unisex {
+  background-image: url(./style/images/wearables/UnisexIcon.svg);
+  background-size: 14px 14px;
+}
+
+.WearableDetail .Highlight .body_shape {
+  background-image: url(./style/images/wearables/BodyShapeIcon.svg);
+}
+
+.WearableDetail .Highlight .earring {
+  background-image: url(./style/images/wearables/EarringsIcon.svg);
+}
+
+.WearableDetail .Highlight .eyebrows {
+  background-image: url(./style/images/wearables/EyebrowIcon.svg);
+}
+
+.WearableDetail .Highlight .eyes {
+  background-image: url(./style/images/wearables/EyesIcon.svg);
+}
+
+.WearableDetail .Highlight .eyewear {
+  background-image: url(./style/images/wearables/EyewearIcon.svg);
+}
+
+.WearableDetail .Highlight .facial_hair {
+  background-image: url(./style/images/wearables/FacilHairIcon.svg);
+}
+
+.WearableDetail .Highlight .feet {
+  background-image: url(./style/images/wearables/FeetIcon.svg);
+}
+
+.WearableDetail .Highlight .hair {
+  background-image: url(./style/images/wearables/HairIcon.svg);
+}
+
+.WearableDetail .Highlight .hat {
+  background-image: url(./style/images/wearables/HatIcon.svg);
+}
+
+.WearableDetail .Highlight .helmet {
+  background-image: url(./style/images/wearables/HelmetIcon.svg);
+}
+
+.WearableDetail .Highlight .lower_body {
+  background-image: url(./style/images/wearables/LowerBodyIcon.svg);
+}
+
+.WearableDetail .Highlight .mask {
+  background-image: url(./style/images/wearables/MaskIcon.svg);
+}
+
+.WearableDetail .Highlight .mouth {
+  background-image: url(./style/images/wearables/MouthIcon.svg);
+}
+
+.WearableDetail .Highlight .tiara {
+  background-image: url(./style/images/wearables/TiaraIcon.svg);
+}
+
+.WearableDetail .Highlight .top_head {
+  background-image: url(./style/images/wearables/TopHeadIcon.svg);
+}
+
+.WearableDetail .Highlight .upper_body {
+  background-image: url(./style/images/wearables/UpperBodyIcon.svg);
+}
+
+.WearableDetail .Highlight .left > .BaseMale {
+  background-image: url(./style/images/wearables/MaleIcon.svg);
+  background-size: 24px 24px;
+}
+
+.WearableDetail .Highlight .left > .BaseFemale {
+  background-image: url(./style/images/wearables/FemaleIcon.svg);
+  background-size: 24px 24px;
+}
+
+.WearableDetail .Highlight .left > .Unisex {
+  background-image: url(./style/images/wearables/UnisexIcon.svg);
+  background-size: 24px 24px;
+}

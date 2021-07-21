@@ -1,0 +1,59 @@
+.item_header {
+  display: flex;
+  margin: 10px;
+}
+
+.itemdetails img {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+}
+.itemdetails {
+  width: 100%;
+  text-align: center;
+}
+
+.titles {
+  padding: 15px 0 15px 10px;
+  text-align: center;
+}
+
+.titles span {
+  padding: 0 5px 0 0;
+}
+
+.item_owner_payout {
+  padding: 10px;
+}
+.item_owner_payout span {
+  border: 1px solid black;
+  padding: 10px;
+  margin: 5px;
+}
+.details_box div {
+  text-align: center;
+}
+
+.fa-4 {
+  font-size: 6rem;
+}
+
+.recent,
+.minted,
+.auction {
+  width: 150px;
+}
+
+.details_box {
+  padding: 10px;
+  border: 1px solid black;
+}
+.details_box i {
+  text-align: center;
+}
+
+.details_cointener {
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+}

@@ -1,0 +1,23 @@
+.leftcolumn {
+  height: 100%;
+  width: 220px;
+  font-size: 1.3rem;
+  padding-top: 4.5rem;
+}
+
+.leftmenu {
+  display: flex;
+  padding: 5px;
+  min-width: max-content;
+}
+
+.leftmenu a {
+  display: flex;
+  /* color: black; */
+}
+
+.leftmenu i {
+  padding: 5px;
+  height: 2rem;
+  width: 2.5rem;
+}

@@ -1,0 +1,10 @@
+.basetable {
+  padding-left: 64px;
+  padding-bottom: 20px;
+}
+.tablebody {
+  max-height: 300px;
+  width: auto;
+  overflow: scroll;
+  overflow-x: hidden;
+}

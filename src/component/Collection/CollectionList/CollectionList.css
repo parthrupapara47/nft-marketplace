@@ -1,0 +1,10 @@
+.collectionlist {
+  padding-top: 30px;
+}
+.collection {
+  display: flex;
+}
+
+.collectionbody {
+  padding-right: 10px;
+}

@@ -1,0 +1,15 @@
+.headermenu {
+  display: flex;
+  flex-direction: row;
+  padding: 10px 10px 10px 20px;
+}
+
+.headermenu label {
+  padding-left: 10px;
+  padding-top: 5px;
+  font-size: medium;
+}
+
+.createnew {
+  padding-left: 7rem;
+}
