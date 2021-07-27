@@ -1,22 +1,49 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Navbar } from "../Navbar";
-import { ReactComponent as Wallet } from "../../style/images/wallet.svg";
-import { Header } from "decentraland-ui";
+import { ReactComponent as WalletSvg } from "../../style/images/wallet.svg";
+import { Button, Header, Page } from "decentraland-ui";
 import { Footer } from "../Footer";
+import { xinfinWallet, _xinfinWallet } from "../../modules/action/xinfinWaller";
+import { useDispatch, useSelector } from "react-redux";
+import WalletModel from "./WalletModel";
+
 const SignInPage: React.FC = () => {
+  const dispatch = useDispatch();
+  const [modelOpen, setModelOpen] = useState(false);
+  const wallet = useSelector((state: any) => {
+    return state.xinfinWallet;
+  });
+  const { isConnected, eth, isConnecting } = wallet;
+
+  const connectWallet = async () => {
+    dispatch(
+      _xinfinWallet({
+        isConnecting: true,
+      })
+    );
+    dispatch(xinfinWallet());
+    if (!isConnected) {
+      setModelOpen(true);
+    }
+  };
+
+  const closeModel = useCallback(() => {
+    setModelOpen(false);
+  }, [modelOpen]);
+
   return (
     <>
       <Navbar />
-      <div className="dcl page fullscreen SignInPage">
+      <Page isFullscreen className="SignInPage">
         <div className="SignIn center">
           <Header>Get Started</Header>
           <div className="StarWalletIcon">
-            <Wallet />
+            <WalletSvg />
           </div>
           <p className="message">
             You can use the
             <a
-              // href="https://xinfin.org/"
+              href="https://chrome.google.com/webstore/detail/xinpay/bocpokimicclpaiekenaeelehdjllofo"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -24,11 +51,17 @@ const SignInPage: React.FC = () => {
             </a>
             extension
           </p>
-          <button className="ui primary button">Connect</button>
-          <p className="error">Could not connect to wallet.</p>
+          <Button
+            primary
+            disabled={isConnected || isConnecting ? true : false}
+            onClick={(e) => connectWallet()}
+          >
+            {isConnected ? "Connected" : "Connect"}
+          </Button>
         </div>
-      </div>
+      </Page>
       <Footer />
+      <WalletModel open={modelOpen} closeModel={closeModel} wallet={wallet} />
     </>
   );
 };

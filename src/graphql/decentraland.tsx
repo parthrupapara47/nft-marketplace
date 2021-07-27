@@ -19,53 +19,7 @@ export const nfts = gql`
       category
       owner
       tokenURI
-      orders {
-        id
-        category
-        nftAddress
-        tokenId
-        txHash
-        owner
-        buyer
-        price
-        status
-        blockNumber
-        expiresAt
-        createdAt
-        updatedAt
-      }
-      bids {
-        id
-        category
-        nftAddress
-        tokenId
-        bidder
-        seller
-        price
-        fingerprint
-        status
-        blockchainId
-        blockNumber
-        expiresAt
-        createdAt
-        updatedAt
-      }
-      activeOrder {
-        id
-        category
-        nft
-        nftAddress
-        tokenId
-        txHash
-        owner
-        buyer
-        price
-        status
-        blockNumber
-        expiresAt
-        createdAt
-        updatedAt
-      }
+
       name
       image
       parcel {

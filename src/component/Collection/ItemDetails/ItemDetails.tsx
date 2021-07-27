@@ -22,12 +22,14 @@ const ItemDetails: React.FC = () => {
   const getItems = useSelector(
     (state: any) => state.collectionReducer.collectionList
   );
+
   useEffect(() => {
     const itemDetails = getItems.find(
       (items: any) => items.id.toString() === itemId
     );
     setItemsList(itemDetails);
   }, []);
+
   return (
     <div className="newitems">
       <Navbar />

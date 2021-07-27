@@ -12,18 +12,26 @@ import { Browse } from "./component/Browse";
 import { SignInPage } from "./component/SignIn";
 import NftPage from "./component/NftPage/NftPage";
 import "./App.css";
+import { xinfinWallet } from "./modules/action/xinfinWaller";
+import { useDispatch } from "react-redux";
+
 interface LocationState {
   from: {
     pathname: string;
   };
 }
+declare let window: any;
 
 const App: React.FC = () => {
   const { pathname } = useLocation<LocationState>();
   document.title = "XinFin-Marketplace";
+  const dispatch = useDispatch();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
+
+  useEffect(() => {}, []);
 
   return (
     <>
@@ -42,6 +50,7 @@ const App: React.FC = () => {
         />
         <Route exact path="/payout" component={Payout} />
         <Route exact path="/payout/:itemid" component={PayoutDetails} />
+        <Redirect to="/" />
       </Switch>
     </>
   );

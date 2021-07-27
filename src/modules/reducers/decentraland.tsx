@@ -1,4 +1,4 @@
-const nftState: any = [];
+const nftState: Array<object> = [];
 
 type Action = {
   type: string;

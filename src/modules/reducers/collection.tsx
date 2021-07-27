@@ -1,4 +1,4 @@
-type initalstate = { collectionList: any };
+type initalstate = { collectionList: any; number: number };
 
 const collectionState: initalstate = {
   collectionList: [
@@ -43,6 +43,7 @@ const collectionState: initalstate = {
       image: "fa fa-heart",
     },
   ],
+  number: 5,
 };
 
 type Action = {
