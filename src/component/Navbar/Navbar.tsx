@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router";
 import { Navbar as BaseNavbar } from "decentraland-dapps/dist/containers";
 import { Link, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import "./Navbar.css";
-import { xinfinWallet } from "../../modules/action/xinfinWaller";
+import { UserMenu } from "../UserMenu";
+// import { UserMenu } from "decentraland-ui";
 
 type ClassName = {
   market: string;
@@ -23,6 +24,7 @@ const Navbar: React.FC = () => {
   const wallet = useSelector((state: any) => {
     return state.xinfinWallet;
   });
+  let rightMenu;
 
   useEffect(() => {
     let path = {
@@ -43,6 +45,10 @@ const Navbar: React.FC = () => {
     setClassname(path);
   }, [pathname]);
 
+  if (wallet.isConnected) {
+    rightMenu = { rightMenu: <UserMenu wallet={wallet} /> };
+  }
+
   return (
     <BaseNavbar
       isFullscreen
@@ -54,6 +60,7 @@ const Navbar: React.FC = () => {
       onSignIn={() => history.push("/signin")}
       address={wallet.accounts}
       mana={wallet.balance}
+      {...rightMenu}
       leftMenu={
         <>
           <Link className={classname.market} to="/">

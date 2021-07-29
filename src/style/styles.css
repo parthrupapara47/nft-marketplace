@@ -29290,11 +29290,11 @@ a.ui.card:hover,
 }
 
 .dcl.logo {
-  display: none;
+  display: inline-block;
   width: 36px;
   height: 36px;
   border-radius: 100%;
-  background-image: "";
+  background-image: url(./xinfinLogo.svg);
   background-size: contain;
 }
 
@@ -29563,7 +29563,6 @@ a.ui.card:hover,
 }
 
 .dcl.navbar-logo {
-  display: none;
   cursor: pointer;
   width: 36px;
   height: 36px;
@@ -29698,7 +29697,7 @@ a.ui.card:hover,
 
 @media (max-width: 768px) {
   .dcl.navbar-logo {
-    display: none;
+    /* display: none; */
     cursor: pointer;
     width: 36px;
     height: 36px;
@@ -29715,7 +29714,7 @@ a.ui.card:hover,
   }
 
   .dcl.navbar-logo {
-    display: none;
+    /* display: none; */
     cursor: pointer;
     width: 32px;
     height: 32px;

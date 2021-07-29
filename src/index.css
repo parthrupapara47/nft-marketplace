@@ -2134,3 +2134,7 @@ code {
   background-image: url(./style/images/wearables/UnisexIcon.svg);
   background-size: 24px 24px;
 }
+
+.dcl.page.NFTBrowse {
+  padding-top: 20px;
+}

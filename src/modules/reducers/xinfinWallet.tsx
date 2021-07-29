@@ -1,19 +1,21 @@
 export type WalletState = {
-  accounts: Array<string>;
-  balance: Array<string>;
+  accounts: string;
+  balance: string;
   isConnected: boolean;
   isConnecting: boolean;
   eth: boolean | null;
   chainId: number | null;
+  contract: any;
 };
 
 const WalletState: WalletState = {
-  accounts: [],
-  balance: [],
+  accounts: "",
+  balance: "",
   isConnected: false,
   isConnecting: false,
   eth: null,
   chainId: null,
+  contract: {},
 };
 
 type Action = {
@@ -25,6 +27,8 @@ const xinfinWallet = (state = WalletState, action: Action) => {
   switch (action.type) {
     case "WALLET":
       return { ...state, ...action.payload };
+    case "WALLET_LOGOUT":
+      return WalletState;
     default:
       return state;
   }

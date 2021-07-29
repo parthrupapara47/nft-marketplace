@@ -3,7 +3,7 @@ import { Navbar } from "../Navbar";
 import { ReactComponent as WalletSvg } from "../../style/images/wallet.svg";
 import { Button, Header, Page } from "decentraland-ui";
 import { Footer } from "../Footer";
-import { xinfinWallet, _xinfinWallet } from "../../modules/action/xinfinWaller";
+import { xinfinWallet, _xinfinWallet } from "../../modules/action/xinfinWallet";
 import { useDispatch, useSelector } from "react-redux";
 import WalletModel from "./WalletModel";
 
@@ -22,7 +22,7 @@ const SignInPage: React.FC = () => {
       })
     );
     dispatch(xinfinWallet());
-    if (!isConnected) {
+    if (!isConnected && !isConnecting) {
       setModelOpen(true);
     }
   };
@@ -56,7 +56,11 @@ const SignInPage: React.FC = () => {
             disabled={isConnected || isConnecting ? true : false}
             onClick={(e) => connectWallet()}
           >
-            {isConnected ? "Connected" : "Connect"}
+            {isConnected
+              ? "Connected"
+              : isConnecting
+              ? "Connecting"
+              : "Connect"}
           </Button>
         </div>
       </Page>

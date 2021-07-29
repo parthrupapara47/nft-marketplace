@@ -20,7 +20,7 @@ const Nftcard: React.FC<Props> = (props: Props) => {
       <NftImage nft={nft} isDraggable={false} />
       <Card.Content>
         <Card.Header>
-          <div className="title">{nft.name}</div>
+          <div className="title">{nft.name?.substr(0, 20)}</div>{" "}
           <div className="ui header dcl mana inline">
             <i className="symbol">⏣</i>
             {Math.floor(nft.activeOrder?.price / 10 ** 18)}

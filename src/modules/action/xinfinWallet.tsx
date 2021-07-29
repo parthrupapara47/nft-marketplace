@@ -1,10 +1,10 @@
 import Web3 from "web3";
+import { nftAbi, nftContractAddress } from "../../contract/nft";
 declare let window: any;
 
 export const xinfinWallet = () => {
   if (window.ethereum) {
     window.web3 = new Web3(window.ethereum);
-    window.ethereum.enable();
   } else if (window.web3) {
     window.web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
   }
@@ -12,14 +12,16 @@ export const xinfinWallet = () => {
   if (web3) {
     return async function (dispatch: any) {
       try {
+        await window.ethereum.enable();
         const account = await web3.eth.getAccounts();
-        // const networkType = await web3.eth.net.getNetworkType();
         const chainId = await web3.eth.getChainId();
         let balance;
-        if (account.length !== 0 && chainId === 50) {
+        if (account.length !== 0 && chainId === 51) {
           balance = await web3.eth
             .getBalance(account[0])
             .then((result: string) => web3.utils.fromWei(result, "ether"));
+          const nftContract = new web3.eth.Contract(nftAbi, nftContractAddress);
+          console.log(nftContract.methods);
 
           dispatch(
             _xinfinWallet({
@@ -29,6 +31,7 @@ export const xinfinWallet = () => {
               isConnecting: false,
               eth: true,
               chainId,
+              contract: { nft: nftContract },
             })
           );
         } else {
@@ -63,4 +66,8 @@ export const xinfinWallet = () => {
 
 export const _xinfinWallet = (data: any) => {
   return { type: "WALLET", payload: data };
+};
+
+export const _walletLogOut = () => {
+  return { type: "WALLET_LOGOUT", payload: null };
 };

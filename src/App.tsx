@@ -12,7 +12,7 @@ import { Browse } from "./component/Browse";
 import { SignInPage } from "./component/SignIn";
 import NftPage from "./component/NftPage/NftPage";
 import "./App.css";
-import { xinfinWallet } from "./modules/action/xinfinWaller";
+import { xinfinWallet } from "./modules/action/xinfinWallet";
 import { useDispatch } from "react-redux";
 
 interface LocationState {

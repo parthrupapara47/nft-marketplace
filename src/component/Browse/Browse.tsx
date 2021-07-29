@@ -8,6 +8,7 @@ import {
   Page,
   Radio,
   Responsive,
+  Tabs,
 } from "decentraland-ui";
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
@@ -118,79 +119,78 @@ const Browse: React.FC = () => {
   return (
     <>
       <Navbar />
+      <div></div>
       <Page className="NFTBrowse">
-        <Container style={{ paddingTop: "30px" }}>
-          <div className="Row">
-            <div className="Column left sidebar">
-              <Header sub>categories</Header>
-              <ul className="Menu NFTSections">
-                {sideMenuData.map((each, index) => {
-                  return (
-                    <li
-                      key={index}
-                      className={`MenuItem ${
-                        selectedValue === each.name ? "active" : null
-                      }`}
-                      onClick={() => selectSideMenu(each.name)}
-                    >
-                      <div className="content">{each.label}</div>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-            <div className="Column left grow">
-              <div className="NFTFilters">
-                <div className="topbar">
-                  <div className="TextFilter Filter">
-                    <div className="text-input">
-                      <input
-                        placeholder="search"
-                        onChange={(e) => onSerchChange(e)}
-                      />
-                    </div>
-                  </div>
-                  <Responsive
-                    minWidth={Responsive.onlyTablet.minWidth}
-                    className="topbar-filter"
+        <div className="Row">
+          <div className="Column left sidebar">
+            <Header sub>categories</Header>
+            <ul className="Menu NFTSections">
+              {sideMenuData.map((each, index) => {
+                return (
+                  <li
+                    key={index}
+                    className={`MenuItem ${
+                      selectedValue === each.name ? "active" : null
+                    }`}
+                    onClick={() => selectSideMenu(each.name)}
                   >
-                    <Dropdown
-                      direction="right"
-                      options={dropdownOptions}
-                      value={dropDownValue}
-                      onChange={(e, value: DropdownProps) =>
-                        setDropDownValue(value.value as SortBy)
-                      }
-                    />
-                  </Responsive>
-                  <Responsive
-                    minWidth={Responsive.onlyTablet.minWidth}
-                    className="topbar-filter"
-                  >
-                    <Radio
-                      toggle
-                      checked={onSale}
-                      onChange={() => setOnSale(!onSale)}
-                      label="ON SaLe"
-                    />
-                  </Responsive>
-                </div>
-              </div>
-              {NftList?.length !== undefined ? (
-                <>
-                  <div className="ui cards">
-                    {NftList.length !== 0 ? renderCard() : null}
-                  </div>
-                  {NftList.length === 0 ? (
-                    <div className="empty">Result Not Found</div>
-                  ) : null}
-                </>
-              ) : (
-                <Loader active size="huge" inline="centered" />
-              )}
-            </div>
+                    <div className="content">{each.label}</div>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
-        </Container>
+          <div className="Column right grow">
+            <div className="NFTFilters">
+              <div className="topbar">
+                <div className="TextFilter Filter">
+                  <div className="text-input">
+                    <input
+                      placeholder="search"
+                      onChange={(e) => onSerchChange(e)}
+                    />
+                  </div>
+                </div>
+                <Responsive
+                  minWidth={Responsive.onlyTablet.minWidth}
+                  className="topbar-filter"
+                >
+                  <Dropdown
+                    direction="right"
+                    options={dropdownOptions}
+                    value={dropDownValue}
+                    onChange={(e, value: DropdownProps) =>
+                      setDropDownValue(value.value as SortBy)
+                    }
+                  />
+                </Responsive>
+                <Responsive
+                  minWidth={Responsive.onlyTablet.minWidth}
+                  className="topbar-filter"
+                >
+                  <Radio
+                    toggle
+                    checked={onSale}
+                    onChange={() => setOnSale(!onSale)}
+                    label="ON SaLe"
+                  />
+                </Responsive>
+              </div>
+            </div>
+            {NftList?.length !== undefined ? (
+              <>
+                <div className="ui cards">
+                  {NftList.length !== 0 ? renderCard() : null}
+                </div>
+                {NftList.length === 0 ? (
+                  <div className="empty">Result Not Found</div>
+                ) : null}
+              </>
+            ) : (
+              <Loader active size="huge" inline="centered" />
+            )}
+          </div>
+        </div>
       </Page>
       <Footer />
     </>

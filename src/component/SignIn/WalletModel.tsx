@@ -13,18 +13,17 @@ const WalletModel: React.FC<Props> = (props: Props) => {
   const [header, setHeader] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   useEffect(() => {
-    console.log(wallet);
-    if (wallet.eth && wallet.chainId !== 50) {
+    if (wallet.eth && wallet.chainId !== 51 && wallet.chainId !== null) {
       setHeader("Wrong Network");
       setMessage(
         "You need to be connected to XinFin MAINNET to use this app, but you are currently connected to Another Network."
       );
     } else if (wallet.eth === false) {
       setHeader("Non-Ethereum browser detected");
-      setMessage("Please install XinFin Extensions");
+      setMessage("Please install XinFin Extensions to Connect Wallet");
     } else if (wallet.eth && !wallet.isConnected) {
       setHeader("Could not connect to wallet.");
-      setMessage("Please try again");
+      setMessage("Something went wrong please ");
     }
   }, [props]);
   return (
