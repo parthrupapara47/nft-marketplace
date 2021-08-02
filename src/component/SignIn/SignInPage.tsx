@@ -19,11 +19,14 @@ const SignInPage: React.FC = () => {
     dispatch(
       _xinfinWallet({
         isConnecting: true,
+        chainId: null,
       })
     );
     dispatch(xinfinWallet());
     if (!isConnected && !isConnecting) {
       setModelOpen(true);
+    } else {
+      setModelOpen(false);
     }
   };
 

@@ -1,36 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Card } from "decentraland-ui";
+import { Card, Mana } from "decentraland-ui";
 import { NftImage } from "../NftImage";
-import { RARITY_COLOR } from "../../modules/nft/types";
+import { RARITY_COLOR, RARITY_TITLE } from "../../modules/nft/types";
 import { NFT } from "../../modules/nft/types";
 import "./NftCard.css";
 import { isUnisex } from "../../modules/Wearable/utils";
+import { getNFTName } from "../../modules/utilis";
 
 interface Props {
   nft: NFT;
   allNft?: any;
   index?: number;
 }
+
 const Nftcard: React.FC<Props> = (props: Props) => {
   const { nft } = props;
 
   return (
-    <Card className="NFTCard" link as={Link} to={`/categories/${nft.id}`}>
+    <Card className="NFTCard" link as={Link} to={`/contracts/${nft.id}`}>
       <NftImage nft={nft} isDraggable={false} />
       <Card.Content>
         <Card.Header>
-          <div className="title">{nft.name?.substr(0, 20)}</div>{" "}
-          <div className="ui header dcl mana inline">
-            <i className="symbol">⏣</i>
-            {Math.floor(nft.activeOrder?.price / 10 ** 18)}
-          </div>
+          <div className="title">{getNFTName(nft)?.substr(0, 20)}</div>{" "}
+          {nft.searchOrderPrice !== null ? (
+            <Mana inline>{Math.floor(nft.searchOrderPrice / 10 ** 18)}</Mana>
+          ) : null}
         </Card.Header>
         <Card.Meta>Xinfin</Card.Meta>
         {nft.category === "wearable" ? (
           <div className="WearableTags tags">
             <div
-              title={nft.searchWearableRarity}
+              title={RARITY_TITLE[nft.searchWearableRarity]}
               className="rarity"
               style={{
                 backgroundColor: RARITY_COLOR[nft.searchWearableRarity],

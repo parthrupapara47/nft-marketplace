@@ -1,5 +1,7 @@
 import { useQuery } from "@apollo/client";
 import {
+  Button,
+  Card,
   Container,
   Dropdown,
   DropdownProps,
@@ -10,15 +12,16 @@ import {
   Responsive,
   Tabs,
 } from "decentraland-ui";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { nfts } from "../../graphql/decentraland";
+import { nft, nfts } from "../../graphql/decentraland";
 import { Navbar } from "../Navbar";
 import { NftCard } from "../NftCard";
 import { sideMenuData } from "./Browse.data";
 import "./Browse.css";
 import { NFT } from "../../modules/nft/types";
 import { Footer } from "../Footer";
+import { getMaxQuerySize, MAX_PAGE, VendorName } from "../../modules/utilis";
 
 enum SortBy {
   NAME = "name",
@@ -27,19 +30,29 @@ enum SortBy {
   CHEAPEST = "searchOrderPrice",
 }
 
+type NftPage = {
+  nftNo: number;
+  pageNo: number;
+  loadding: boolean;
+};
+const initPageNo = { nftNo: 24, pageNo: 1, loadding: false };
+
 const Browse: React.FC = () => {
   const { category } = useParams<{ category: string }>();
   const history = useHistory();
-  const [NftList, setNftList] = useState<Array<NFT> | undefined>(undefined);
+  const [NftList, setNftList] = useState<Array<NFT>>([]);
   const [selectedValue, setSelectedValue] = useState<any>(category || "all");
-  const [serchValue, setSerchValue] = useState<string>();
-  const [debounceValue, setDebounceValue] = useState<string>();
+  const [serchValue, setSerchValue] = useState<string>("");
+  const [debounceValue, setDebounceValue] = useState<string>("");
   const [onSale, setOnSale] = useState<boolean>(true);
+  const [loadNft, setLoadNft] = useState<NftPage>(initPageNo);
+  const [loadding, setLoadding] = useState<boolean>(true);
   const [dropDownValue, setDropDownValue] = useState<SortBy>(
     SortBy.RECENTLY_LISTED
   );
-  const decentralandData: any = useQuery(nfts, {
+  const decentralandData = useQuery(nfts, {
     variables: {
+      skip: loadNft.nftNo * (loadNft.pageNo - 1),
       first: 24,
       orderBy: dropDownValue,
       orderDirection: dropDownValue === SortBy.CHEAPEST ? "asc" : "desc",
@@ -57,9 +70,21 @@ const Browse: React.FC = () => {
   });
 
   useEffect(() => {
-    setNftList(undefined);
-    if (decentralandData.data !== undefined) {
+    setLoadNft(initPageNo);
+    setLoadding(true);
+  }, [category, debounceValue, onSale]);
+
+  useEffect(() => {
+    if (decentralandData.data !== undefined && loadNft.pageNo === 1) {
       setNftList(decentralandData.data.nfts);
+      setLoadding(false);
+    } else if (
+      decentralandData.data !== undefined &&
+      NftList.length !== 0 &&
+      loadNft.pageNo !== 1
+    ) {
+      setNftList([...NftList, ...decentralandData.data.nfts]);
+      setLoadNft({ ...loadNft, loadding: false });
     }
   }, [category, decentralandData, debounceValue]);
 
@@ -79,8 +104,11 @@ const Browse: React.FC = () => {
     };
   }, [serchValue]);
 
+  useEffect(() => {
+    if (!onSale) setDropDownValue(SortBy.NEWEST);
+  }, [onSale]);
+
   const selectSideMenu = (value: string) => {
-    setNftList(undefined);
     history.push(`/browse/${value}`);
     switch (value) {
       case "all":
@@ -93,6 +121,12 @@ const Browse: React.FC = () => {
         break;
     }
   };
+
+  const maxQuerySize = getMaxQuerySize(VendorName.DECENTRALAND);
+
+  const hasExtraPages =
+    (NftList.length >= loadNft.pageNo * 24 && loadNft.pageNo <= MAX_PAGE) ||
+    loadNft.loadding;
 
   const dropdownOptions = [
     { value: SortBy.NEWEST, text: "Newest" },
@@ -110,8 +144,13 @@ const Browse: React.FC = () => {
     });
   }
 
+  const handleLoadMore = () => {
+    const pageNo = loadNft.pageNo + 1;
+    setLoadNft({ ...loadNft, pageNo, loadding: true });
+  };
+
   const renderCard = () => {
-    return NftList?.map((nft: NFT, index: number) => (
+    return NftList.map((nft: NFT, index: number) => (
       <NftCard key={index} nft={nft} index={index} />
     ));
   };
@@ -177,13 +216,25 @@ const Browse: React.FC = () => {
                 </Responsive>
               </div>
             </div>
-            {NftList?.length !== undefined ? (
+            {!loadding ? (
               <>
-                <div className="ui cards">
+                <Card.Group>
                   {NftList.length !== 0 ? renderCard() : null}
-                </div>
+                </Card.Group>
                 {NftList.length === 0 ? (
                   <div className="empty">Result Not Found</div>
+                ) : null}
+                {NftList.length > 0 && hasExtraPages ? (
+                  <div className="load-more">
+                    <Button
+                      loading={loadNft.loadding}
+                      inverted
+                      primary
+                      onClick={handleLoadMore}
+                    >
+                      {"Load more"}
+                    </Button>
+                  </div>
                 ) : null}
               </>
             ) : (

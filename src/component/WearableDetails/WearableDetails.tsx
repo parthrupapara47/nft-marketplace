@@ -1,12 +1,13 @@
 import React from "react";
 import { Popup, Profile } from "decentraland-ui";
 import { Container, Header, Loader } from "decentraland-ui";
-import { NFT, RARITY_COLOR } from "../../modules/nft/types";
+import { NFT, RARITY_COLOR, RARITY_TITLE } from "../../modules/nft/types";
 import { NftImage } from "../NftImage";
 import { isUnisex } from "../../modules/Wearable/utils";
-import { Bid } from "../Bid";
+import { Bids } from "../Bids";
 import { TransactionHistory } from "../TransactionHistory";
 import { OrderDetails } from "../OrderDetails";
+import { getNFTName } from "../../modules/utilis";
 
 type Props = {
   nft: NFT;
@@ -27,10 +28,10 @@ const WearableDetails: React.FC<Props> = (props: Props) => {
                 <div className="Column left grow">
                   <Header size="large">
                     <div className="text">
-                      {nft.name}
+                      {getNFTName(nft)}
                       <Popup
                         position="top center"
-                        content={nft.wearable.rarity}
+                        content={RARITY_TITLE[nft.wearable.rarity]}
                         trigger={
                           <div
                             className="rarity"
@@ -69,7 +70,7 @@ const WearableDetails: React.FC<Props> = (props: Props) => {
                   </div>
                 </div>
               ) : null}
-              <OrderDetails nft={nft} bid buy />
+              <OrderDetails nft={nft} />
               <div className="Highlights">
                 <Header sub>Highlights</Header>
                 <div className="Row ">
@@ -112,7 +113,7 @@ const WearableDetails: React.FC<Props> = (props: Props) => {
                   )}
                 </div>
               </div>
-              <Bid nft={nft} />
+              <Bids nft={nft} />
               <TransactionHistory nft={nft} />
             </Container>
           </div>

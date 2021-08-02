@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, HtmlHTMLAttributes } from "react";
 import { useLocation } from "react-router";
 import { Navbar as BaseNavbar } from "decentraland-dapps/dist/containers";
 import { Link, useHistory } from "react-router-dom";
@@ -25,6 +25,11 @@ const Navbar: React.FC = () => {
     return state.xinfinWallet;
   });
   let rightMenu;
+  const navbarLogo = document.getElementsByClassName("dcl navbar-logo")[0];
+  if (navbarLogo !== undefined) {
+    navbarLogo.setAttribute("href", "https://xinfin.org/");
+    navbarLogo.setAttribute("target", "_blank");
+  }
 
   useEffect(() => {
     let path = {

@@ -3,14 +3,16 @@ import { Atlas as AtlasComponent } from "decentraland-ui";
 import "./NftImage.css";
 import yearsToMonths from "date-fns/esm/yearsToMonths/index";
 import { RARITY_COLOR, RARITY_COLOR_LIGHT, NFT } from "../../modules/nft/types";
+import { getNFTName } from "../../modules/utilis";
 
 type Props = {
   nft: NFT;
   isDraggable: boolean;
+  zoom?: number;
 };
 
 const NftImage: React.FC<Props> = (props: Props) => {
-  const { nft, isDraggable } = props;
+  const { nft, isDraggable, zoom } = props;
   let selected: any = [];
 
   const getCenter = (selection: { x: number; y: number }[]) => {
@@ -54,7 +56,7 @@ const NftImage: React.FC<Props> = (props: Props) => {
               }, ${RARITY_COLOR[nft.searchWearableRarity]})`,
             }}
           >
-            <img alt={nft.name} className="image" src={nft.image} />
+            <img alt={getNFTName(nft)} className="image" src={nft.image} />
           </div>
         );
       case "parcel":
@@ -64,7 +66,7 @@ const NftImage: React.FC<Props> = (props: Props) => {
         });
         return (
           <AtlasComponent
-            zoom={0.5}
+            zoom={zoom || 0.5}
             x={+nft.searchParcelX}
             y={+nft.searchParcelY}
             isDraggable={isDraggable}
@@ -82,7 +84,7 @@ const NftImage: React.FC<Props> = (props: Props) => {
         const [x, y] = getCenter(selected);
         return (
           <AtlasComponent
-            zoom={0.5}
+            zoom={zoom || 0.5}
             x={x}
             y={y}
             isDraggable={isDraggable}
@@ -91,9 +93,9 @@ const NftImage: React.FC<Props> = (props: Props) => {
         );
       case "ens":
         return (
-          <div className="ens-subdomain small">
-            <div className="name">{nft.name}</div>
-            <div className="monospace">{nft.name}</div>
+          <div className="ens-subdomain">
+            <div className="name">{getNFTName(nft)}</div>
+            <div className="monospace">{getNFTName(nft)}</div>
           </div>
         );
       default:

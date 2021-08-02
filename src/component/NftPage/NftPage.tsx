@@ -10,10 +10,11 @@ import { ParcelDetails } from "../ParcelDetails";
 import { NFT } from "../../modules/nft/types";
 import { EstateDetails } from "../EstateDetails";
 import { Footer } from "../Footer";
+import { NotFound } from "../NotFound";
 
 const NftPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [nftData, setNftData] = useState<NFT | null>(null);
+  const [nftData, setNftData] = useState<NFT | undefined>(undefined);
   const nftDetails: any = useQuery(nft, { variables: { id: id } });
 
   useEffect(() => {
@@ -25,22 +26,32 @@ const NftPage: React.FC = () => {
   return (
     <>
       <Navbar />
-      {nftData === null ? (
-        <Loader active size="huge" inline="centered" />
-      ) : (
-        <Page className="NFTPage" isFullscreen>
-          {nftData.category === "wearable" ? (
-            <WearableDetails nft={nftData} />
-          ) : null}
-          {nftData.category === "parcel" ? (
-            <ParcelDetails nft={nftData} />
-          ) : null}
-          {nftData.category === "estate" ? (
-            <EstateDetails nft={nftData} />
-          ) : null}
-          {nftData.category === "ens" ? <NameDetails nft={nftData} /> : null}
-        </Page>
-      )}
+      <Page className="NFTPage" isFullscreen>
+        {nftData === undefined ? (
+          <Loader active size="huge" inline="centered" />
+        ) : (
+          <>
+            {nftData === null ? (
+              <NotFound />
+            ) : (
+              <>
+                {nftData.category === "wearable" ? (
+                  <WearableDetails nft={nftData} />
+                ) : null}
+                {nftData.category === "parcel" ? (
+                  <ParcelDetails nft={nftData} />
+                ) : null}
+                {nftData.category === "estate" ? (
+                  <EstateDetails nft={nftData} />
+                ) : null}
+                {nftData.category === "ens" ? (
+                  <NameDetails nft={nftData} />
+                ) : null}
+              </>
+            )}
+          </>
+        )}
+      </Page>
       <Footer />
     </>
   );

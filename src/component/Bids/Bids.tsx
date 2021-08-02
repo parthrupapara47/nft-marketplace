@@ -5,7 +5,7 @@ import { NFT } from "../../modules/nft/types";
 
 type Props = { nft: NFT };
 
-const Bid: React.FC<Props> = (props: Props) => {
+const Bids: React.FC<Props> = (props: Props) => {
   const { nft } = props;
   return (
     <>
@@ -39,4 +39,4 @@ const Bid: React.FC<Props> = (props: Props) => {
   );
 };
 
-export default React.memo(Bid);
+export default React.memo(Bids);

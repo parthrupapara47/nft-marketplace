@@ -3,11 +3,13 @@ import { gql } from "@apollo/client";
 export const nfts = gql`
   query nfts(
     $first: Int = 50
+    $skip: Int = 0
     $where: NFT_filter
     $orderBy: NFT_orderBy = updatedAt
     $orderDirection: OrderDirection = asc
   ) {
     nfts(
+      skip: $skip
       first: $first
       orderBy: $orderBy
       orderDirection: $orderDirection
@@ -19,7 +21,6 @@ export const nfts = gql`
       category
       owner
       tokenURI
-
       name
       image
       parcel {

@@ -1572,6 +1572,7 @@ a.ui.card.link:hover .meta {
 }
 .NFTAction .back {
   /* background-image: url(/static/media/back.eb039d08.svg); */
+  background-image: url(./style/images/back.svg);
   background-repeat: no-repeat;
   background-position-x: 10px;
   background-position-y: 9px;

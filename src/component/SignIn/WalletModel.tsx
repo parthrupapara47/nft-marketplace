@@ -13,7 +13,7 @@ const WalletModel: React.FC<Props> = (props: Props) => {
   const [header, setHeader] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   useEffect(() => {
-    if (wallet.eth && wallet.chainId !== 51 && wallet.chainId !== null) {
+    if (wallet.eth && wallet.chainId !== 51) {
       setHeader("Wrong Network");
       setMessage(
         "You need to be connected to XinFin MAINNET to use this app, but you are currently connected to Another Network."

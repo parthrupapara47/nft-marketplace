@@ -13,32 +13,40 @@ import { SignInPage } from "./component/SignIn";
 import NftPage from "./component/NftPage/NftPage";
 import "./App.css";
 import { xinfinWallet } from "./modules/action/xinfinWallet";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { NFTBuy } from "./component/NFTBuy";
+import { WalletState } from "./modules/reducers/xinfinWallet";
+import { NFTBid } from "./component/NFTBid";
 
 interface LocationState {
   from: {
     pathname: string;
   };
 }
-declare let window: any;
 
 const App: React.FC = () => {
   const { pathname } = useLocation<LocationState>();
   document.title = "XinFin-Marketplace";
   const dispatch = useDispatch();
+  const wallet: WalletState = useSelector((state: any) => {
+    return state.xinfinWallet;
+  });
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
-
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (!wallet.isConnected) dispatch(xinfinWallet());
+  }, []);
 
   return (
     <>
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/signin" component={SignInPage} />
-        <Route exact path="/categories/:id" component={NftPage} />
+        <Route exact path="/contracts/:id" component={NftPage} />
+        <Route exact path="/contracts/:id/buy" component={NFTBuy} />
+        <Route exact path="/contracts/:id/bid" component={NFTBid} />
         <Route exact path="/browse/:category?" component={Browse} />
         <Route exact path="/collection" component={CollectionList} />
         <Route exact path="/collection/:itemId" component={ItemDetails} />

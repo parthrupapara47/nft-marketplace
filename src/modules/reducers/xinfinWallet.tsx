@@ -5,7 +5,6 @@ export type WalletState = {
   isConnecting: boolean;
   eth: boolean | null;
   chainId: number | null;
-  contract: any;
 };
 
 const WalletState: WalletState = {
@@ -15,7 +14,6 @@ const WalletState: WalletState = {
   isConnecting: false,
   eth: null,
   chainId: null,
-  contract: {},
 };
 
 type Action = {

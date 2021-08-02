@@ -17,7 +17,6 @@ const UserMenu: React.FC<Props> = (props: Props) => {
     setOpenMenu(false);
   };
   const logOut = () => {
-    console.log("logout");
     dispatch(_walletLogOut());
   };
   return (
