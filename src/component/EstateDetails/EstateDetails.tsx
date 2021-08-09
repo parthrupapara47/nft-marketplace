@@ -6,6 +6,7 @@ import { NftImage } from "../NftImage";
 import { TransactionHistory } from "../TransactionHistory";
 import { OrderDetails } from "../OrderDetails";
 import { getNFTName } from "../../modules/utilis";
+import { Link } from "react-router-dom";
 
 type Props = {
   nft: NFT;
@@ -37,7 +38,7 @@ const EstateDetails: React.FC<Props> = (props: Props) => {
               </div>
               <div className="Column right">
                 <div className="Owner">
-                  <a>
+                  <Link to={`/accounts/${nft.owner.address}`}>
                     <label>Owner</label>
                     <div className="blockie-wrapper">
                       <Profile
@@ -46,7 +47,7 @@ const EstateDetails: React.FC<Props> = (props: Props) => {
                         imageOnly
                       />
                     </div>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

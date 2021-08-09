@@ -17,16 +17,15 @@ const BuyModal: React.FC<Props> = (props: Props) => {
   const { nft, wallet } = props;
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const history = useHistory<History>();
-  const order = nft.orders.length;
+  const order = nft.activeOrder;
   const isOwner = isOwnedBy(nft, wallet);
   const isInsufficientMANA =
     !!order &&
-    parseInt(wallet.balance) <
-      +fromWei(nft.searchOrderPrice.toString(), "ether");
+    parseInt(wallet.balance) < +fromWei(order.price.toString(), "ether");
   const isDisabled =
     !order || isOwner || isInsufficientMANA || nft.category === "estate";
 
-  const priceInEth = +fromWei(nft.searchOrderPrice.toString(), "ether");
+  const priceInEth = +fromWei(order.price.toString(), "ether");
 
   let subtitle = null;
   if (!order) {

@@ -1,61 +1,133 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { addNewCollection } from "../../../modules/action/collection";
+import {
+  addNewCollection,
+  updateCollection,
+} from "../../../modules/action/collection";
 import { useDispatch } from "react-redux";
 import { Modal, Field, Button } from "decentraland-ui";
 import { ModalSucessfull } from "../../ModalSucessfull";
-import { form, itemField, errorForm } from "./NewCollection.data";
+import { form, errorForm, FORM } from "./NewCollection.data";
 import "./NewCollection.css";
+import { MaxFileSize } from "../../../modules/utilis";
 
 type Props = {
   modal: boolean;
-  setModal?: any;
+  setModal: any;
+  collection?: FORM;
 };
 
 const NewCollection: React.FC<Props> = (props: Props) => {
-  const { modal, setModal } = props;
+  const { modal, setModal, collection } = props;
   const [open, setOpen] = useState(false);
   const [sucessfull, setSucessfull] = useState(false);
-  const [newcollection, setnewCollection] = useState<any>(form);
+  const [collectionDetails, setcollectionDetails] = useState<FORM | any>(form);
   const [formError, setFormError] = useState<any>(errorForm);
+  const [sucessMessage, setSucessMessage] = useState<string>("");
   const dispatch = useDispatch();
 
   useEffect(() => {
     setOpen(modal);
   }, [modal]);
 
+  useEffect(() => {
+    collection && setcollectionDetails(collection);
+  }, [collection]);
+
   const modalSucessfull = useCallback(() => {
     setSucessfull(false);
-    setnewCollection(form);
+    !collection && setcollectionDetails(form);
   }, []);
 
   const closeModal = () => {
     setModal();
     setFormError(errorForm);
-    setnewCollection(form);
+    !collection && setcollectionDetails(form);
   };
 
   const onFieldChange = (e?: any) => {
     setFormError({ ...formError, [e.target.name]: false });
-    if (e.target.name === "file") {
-      setnewCollection({ ...newcollection, file: e.target.files[0] });
+    if (e.target.name === "image") {
+      const fileSize = e.target.files[0]?.size;
+      if (fileSize < 2048) {
+        setFormError({ ...formError, maxSize: false });
+        var file = e.target.files[0];
+        var reader = new FileReader();
+        var url = reader.readAsDataURL(file);
+
+        reader.onloadend = function (e: any) {
+          setcollectionDetails({
+            ...collectionDetails,
+            image: reader.result,
+          });
+        };
+      } else {
+        setFormError({ ...formError, maxSize: true });
+        setcollectionDetails({
+          ...collectionDetails,
+          image: "",
+        });
+      }
+
       return;
     }
-    setnewCollection({ ...newcollection, [e.target.name]: e.target.value });
+    setcollectionDetails({
+      ...collectionDetails,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const onImageChange = (e: any) => {
+    setFormError({ ...formError, image: false });
+    const file = e.target.files;
+    if (file && file.length > 0 && file[0].type.includes("image")) {
+      const fileSize = e.target.files[0]?.size;
+      if (fileSize < MaxFileSize) {
+        setFormError({ ...formError, maxSize: false });
+        var reader = new FileReader();
+        var url = reader.readAsDataURL(file[0]);
+
+        reader.onloadend = function (e: any) {
+          setcollectionDetails({
+            ...collectionDetails,
+            image: reader.result,
+          });
+        };
+      } else if (fileSize > MaxFileSize) {
+        setFormError({ ...formError, maxSize: true });
+        setcollectionDetails({
+          ...collectionDetails,
+          image: "",
+        });
+      }
+    } else {
+      setFormError({ ...formError, maxSize: false });
+      setcollectionDetails({
+        ...collectionDetails,
+        image: "",
+      });
+    }
   };
 
   const submitForm = () => {
     let err: any = {};
     let formvalid = true;
-    for (var key in newcollection) {
-      if (newcollection[key] === "") {
+    for (var key in collectionDetails) {
+      if (collectionDetails[key] === "") {
         err[key] = true;
         formvalid = false;
       }
     }
     setFormError(err);
-    if (formvalid) {
+    if (formvalid && !collection) {
+      setSucessMessage(`${collectionDetails.name} added sucessfully`);
       setSucessfull(true);
-      dispatch(addNewCollection(newcollection));
+      dispatch(addNewCollection(collectionDetails));
+      setModal();
+    }
+    if (formvalid && collection) {
+      setSucessMessage(`${collectionDetails.name} updated sucessfully`);
+      setSucessfull(true);
+      dispatch(updateCollection(collectionDetails));
       setModal();
     }
   };
@@ -65,25 +137,37 @@ const NewCollection: React.FC<Props> = (props: Props) => {
       <Modal size="small" open={open}>
         <Modal.Header>New Collection</Modal.Header>
         <Modal.Content>
-          {itemField.map((field, index) => (
-            <Field
-              key={index}
-              {...field}
-              required={newcollection[field.name] !== "" ? null : null}
-              value={newcollection[field.name]}
-              onChange={(e) => onFieldChange(e)}
-              error={formError[field.name]}
-            />
-          ))}
           <Field
-            label="Upload file"
-            placeholder=""
-            name="file"
-            type="file"
-            accept=".imge, .jpeg, .jpg, .png,"
+            label="Name"
+            placeholder="Test 1-(i)"
+            name="name"
+            required={collectionDetails.name !== "" ? null : null}
+            value={collectionDetails.name}
             onChange={(e) => onFieldChange(e)}
-            error={formError.file}
+            error={formError.name}
           />
+          <Field
+            label="Description"
+            placeholder=""
+            name="description"
+            required={collectionDetails.description !== "" ? null : null}
+            value={collectionDetails.description}
+            onChange={(e) => onFieldChange(e)}
+            error={formError.description}
+          />
+          <Field
+            label="Logo Image"
+            placeholder=""
+            name="image"
+            type="file"
+            accept="image/*"
+            onChange={(e) => onImageChange(e)}
+            error={formError.image || formError.maxSiz}
+            message={formError.maxSize ? "The max size 2MB" : undefined}
+          />
+          {collectionDetails.image !== null ? (
+            <img src={collectionDetails.image} className="imagepreview" />
+          ) : null}
         </Modal.Content>
         <Modal.Actions>
           <Button primary onClick={() => submitForm()}>
@@ -96,7 +180,7 @@ const NewCollection: React.FC<Props> = (props: Props) => {
         <ModalSucessfull
           modal={sucessfull}
           setModal={modalSucessfull}
-          message={`${newcollection.name} added sucessfully`}
+          message={sucessMessage}
         />
       ) : null}
     </>

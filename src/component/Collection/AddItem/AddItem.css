@@ -1,7 +1,7 @@
 .headermenu {
   display: flex;
   flex-direction: row;
-  padding: 10px 10px 10px 20px;
+  padding: 3% 5% 5% 15%;
 }
 
 .headermenu label {
@@ -12,4 +12,8 @@
 
 .createnew {
   padding-left: 7rem;
+}
+.topbar {
+  padding-left: 3%;
+  padding-top: 1%;
 }

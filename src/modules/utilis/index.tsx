@@ -103,3 +103,5 @@ export function getMaxQuerySize(vendor: VendorName) {
       return MAX_QUERY_SIZE;
   }
 }
+
+export const MaxFileSize = 2 * 1024 * 1024;

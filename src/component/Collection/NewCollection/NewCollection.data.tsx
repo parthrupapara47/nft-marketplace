@@ -1,22 +1,18 @@
-export const itemField = [
-  { label: "Name", placeholder: "Test 1-(i)", name: "name" },
-
-  {
-    label: "Description",
-    placeholder: "",
-    name: "description",
-  },
-];
-
 export const form = {
   name: "",
   description: "",
-  file: "",
-  image: "fa fa-heart",
+  image: null,
 };
+
+export interface FORM {
+  name: string;
+  description: string;
+  image: string | ArrayBuffer | null;
+}
 
 export const errorForm = {
   name: false,
   description: false,
   file: false,
+  maxSize: false,
 };

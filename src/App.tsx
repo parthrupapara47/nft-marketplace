@@ -17,6 +17,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { NFTBuy } from "./component/NFTBuy";
 import { WalletState } from "./modules/reducers/xinfinWallet";
 import { NFTBid } from "./component/NFTBid";
+import { Account } from "./component/Account";
+import { SellPage } from "./component/SellPage";
 
 interface LocationState {
   from: {
@@ -44,10 +46,13 @@ const App: React.FC = () => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/signin" component={SignInPage} />
+        <Route exact path="/account" component={Account} />
+        <Route exact path="/accounts/:address" component={Account} />
+        <Route exact path="/browse/:category?" component={Browse} />
         <Route exact path="/contracts/:id" component={NftPage} />
         <Route exact path="/contracts/:id/buy" component={NFTBuy} />
         <Route exact path="/contracts/:id/bid" component={NFTBid} />
-        <Route exact path="/browse/:category?" component={Browse} />
+        <Route exact path="/contracts/:id/sell" component={SellPage} />
         <Route exact path="/collection" component={CollectionList} />
         <Route exact path="/collection/:itemId" component={ItemDetails} />
         <Route exact path="/collection/:itemId/additem" component={AddItem} />

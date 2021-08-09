@@ -17,12 +17,22 @@ const Card: React.FC<Props> = (props: Props) => {
       <BaseCard link to={props.link} as={Link}>
         <BaseCard.Content>
           <BaseCard.Header textAlign="center">
-            <i
+            {/* <i
               className={props.image}
               style={{
                 fontSize: "60px",
                 textAlign: "center",
                 color: "black",
+              }}
+            /> */}
+            <img
+              className="image"
+              src={props.image}
+              alt={props.meta}
+              style={{
+                maxHeight: "100px",
+                minHeight: "100px",
+                textAlign: "center",
               }}
             />
             {props.header}

@@ -9,6 +9,8 @@ import { Leftcolumn } from "../../Leftcolumn";
 import { Hero } from "../../Hero";
 import { heroDetails } from "./CollectionList.data";
 import { Footer } from "../../Footer";
+import { WalletProvider } from "../../WalletProvider";
+import { marketPlaceContract, nftContract } from "../../../contract/methods";
 
 const CollectionList: React.FC = () => {
   const [modal, setModal] = useState(false);
@@ -16,6 +18,9 @@ const CollectionList: React.FC = () => {
   const closeModal = useCallback(() => {
     setModal(false);
   }, []);
+
+  console.log("nft Contract", nftContract.methods);
+  console.log("marketplace contract", marketPlaceContract.methods);
 
   const collection = useSelector(
     (state: any) => state.collectionReducer.collectionList
@@ -27,47 +32,52 @@ const CollectionList: React.FC = () => {
   return (
     <div className="homepage">
       <Navbar />
-      <div className="collection">
-        <div className="leftcolumn">
-          <Leftcolumn />
+      <div></div>
+      {/* <Page className="NFTBrowse"> */}
+      <WalletProvider>
+        <div className="collection Row">
+          <div className="leftcolumn Column left sidebar">
+            <Leftcolumn />
+          </div>
+          <div className="collectionbody Column right grow">
+            <Hero
+              header={heroDetails.header}
+              description={heroDetails.description}
+            />
+            <Card.Group className="collectionlist">
+              <NewCollection modal={modal} setModal={closeModal} />
+              <Card onClick={() => setModal(true)}>
+                <Card.Content>
+                  <Card.Header textAlign="center">
+                    <i
+                      className="fa fa-plus"
+                      style={{
+                        fontSize: "100px",
+                        textAlign: "center",
+                        color: "black",
+                      }}
+                    />
+                  </Card.Header>
+                  <Card.Meta textAlign="center">
+                    <h3>Create New Collection</h3>
+                  </Card.Meta>
+                </Card.Content>
+              </Card>
+              {cards !== []
+                ? cards.map((card: any, index: number) => (
+                    <NewCard
+                      key={index}
+                      link={`/collection/${card.id}`}
+                      image={card.image}
+                      meta={card.name}
+                    />
+                  ))
+                : null}
+            </Card.Group>
+          </div>
         </div>
-        <div className="collectionbody">
-          <Hero
-            header={heroDetails.header}
-            description={heroDetails.description}
-          />
-          <Card.Group className="collectionlist">
-            <NewCollection modal={modal} setModal={closeModal} />
-            <Card onClick={() => setModal(true)}>
-              <Card.Content>
-                <Card.Header textAlign="center">
-                  <i
-                    className="fa fa-plus"
-                    style={{
-                      fontSize: "60px",
-                      textAlign: "center",
-                      color: "black",
-                    }}
-                  />
-                </Card.Header>
-                <Card.Meta textAlign="center">
-                  <h3>Create New Collection</h3>
-                </Card.Meta>
-              </Card.Content>
-            </Card>
-            {cards !== []
-              ? cards.map((card: any, index: number) => (
-                  <NewCard
-                    key={index}
-                    link={`/collection/${card.id}`}
-                    image={card.image}
-                    meta={card.name}
-                  />
-                ))
-              : null}
-          </Card.Group>
-        </div>
-      </div>
+      </WalletProvider>
+      {/* </Page> */}
       <Footer />
     </div>
   );

@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { Loader, Page } from "decentraland-ui";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { nft } from "../../graphql/decentraland";
 import { NFT } from "../../modules/nft/types";
-import { BuyModal } from "../BuyModal";
 import { Footer } from "../Footer";
 import { Navbar } from "../Navbar";
 import { NotFound } from "../NotFound";
+import { SellModal } from "../SellModal";
 import { WalletProvider } from "../WalletProvider";
 
-const NFTBuy: React.FC = () => {
+const SellPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [nftData, setNftData] = useState<NFT | undefined>(undefined);
   const nftDetails: any = useQuery(nft, { variables: { id: id } });
@@ -28,14 +28,14 @@ const NFTBuy: React.FC = () => {
   return (
     <>
       <Navbar />
-      <Page className="BuyPage">
+      <Page className="SellPage">
         <WalletProvider>
-          {nftData === undefined ? (
+          {nftData === undefined || wallet.isConnecting ? (
             <Loading />
           ) : nftData === null ? (
             <NotFound />
           ) : (
-            <BuyModal nft={nftData} wallet={wallet} />
+            <SellModal nft={nftData} wallet={wallet} />
           )}
         </WalletProvider>
       </Page>
@@ -50,4 +50,4 @@ const Loading = () => (
   </div>
 );
 
-export default NFTBuy;
+export default SellPage;

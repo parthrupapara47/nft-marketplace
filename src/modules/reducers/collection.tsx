@@ -1,49 +1,24 @@
-type initalstate = { collectionList: any; number: number };
+type initalstate = { collectionList: any };
 
 const collectionState: initalstate = {
   collectionList: [
     {
       id: 1,
-      name: "test1",
-      location: "test1",
+      name: "Hat",
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-      image: "fa fa-heart",
+      image:
+        "https://peer.decentraland.org/lambdas/collections/contents/urn:decentraland:matic:collections-v2:0x66194b1abcbfbedd83841775404b245c8f9e4183:2/thumbnail",
     },
     {
       id: 2,
-      name: "test2",
-      location: "test2",
+      name: "Jacket",
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-      image: "fa fa-heart",
-    },
-    {
-      id: 3,
-      name: "test3",
-      location: "test3",
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-      image: "fa fa-heart",
-    },
-    {
-      id: 4,
-      name: "test4",
-      location: "test4",
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-      image: "fa fa-heart",
-    },
-    {
-      id: 5,
-      name: "test5",
-      location: "test5",
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-      image: "fa fa-heart",
+      image:
+        "https://peer.decentraland.org/lambdas/collections/contents/urn:decentraland:matic:collections-v2:0xa1e2f2a99f9ea8f9e92e81842470e9e0041428b8:2/thumbnail",
     },
   ],
-  number: 5,
 };
 
 type Action = {
@@ -60,6 +35,13 @@ const collectionReducer = (state = collectionState, action: Action) => {
       };
       state.collectionList.unshift(newCollection);
       return state;
+    case "UPDATE_COLLECTION":
+      const updated = state.collectionList.filter(
+        (each: any) => each.id !== action.payload.id
+      );
+      updated.push(action.payload);
+      console.log(updated);
+      return { ...state, collectionList: updated };
     default:
       return state;
   }

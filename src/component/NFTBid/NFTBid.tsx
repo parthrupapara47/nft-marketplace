@@ -12,7 +12,7 @@ import { Navbar } from "../Navbar";
 import { NotFound } from "../NotFound";
 import { WalletProvider } from "../WalletProvider";
 
-const NFTBid = () => {
+const NFTBid: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [nftData, setNftData] = useState<NFT | null>(null);
   const nftDetails: any = useQuery(nft, { variables: { id: id } });
