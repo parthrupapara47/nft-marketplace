@@ -62,11 +62,11 @@ const NFTBrowse: React.FC<Props> = (props: Props) => {
       orderDirection: dropDownValue === SortBy.CHEAPEST ? "asc" : "desc",
       where: {
         owner: props.address,
-        category:
-          selectedValue !== undefined && selectedValue !== "all"
-            ? selectedValue
-            : undefined,
-        category_not: undefined,
+        // category:
+        //   selectedValue !== undefined && selectedValue !== "all"
+        //     ? selectedValue
+        //     : undefined,
+        category: "wearable",
         name_contains: debounceValue,
         updatedAt_gt: 1,
         searchOrderStatus: onSale ? "open" : undefined,

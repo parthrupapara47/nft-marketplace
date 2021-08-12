@@ -46,30 +46,6 @@ const NewCollection: React.FC<Props> = (props: Props) => {
 
   const onFieldChange = (e?: any) => {
     setFormError({ ...formError, [e.target.name]: false });
-    if (e.target.name === "image") {
-      const fileSize = e.target.files[0]?.size;
-      if (fileSize < 2048) {
-        setFormError({ ...formError, maxSize: false });
-        var file = e.target.files[0];
-        var reader = new FileReader();
-        var url = reader.readAsDataURL(file);
-
-        reader.onloadend = function (e: any) {
-          setcollectionDetails({
-            ...collectionDetails,
-            image: reader.result,
-          });
-        };
-      } else {
-        setFormError({ ...formError, maxSize: true });
-        setcollectionDetails({
-          ...collectionDetails,
-          image: "",
-        });
-      }
-
-      return;
-    }
     setcollectionDetails({
       ...collectionDetails,
       [e.target.name]: e.target.value,
@@ -120,12 +96,11 @@ const NewCollection: React.FC<Props> = (props: Props) => {
     setFormError(err);
     if (formvalid && !collection) {
       setSucessMessage(`${collectionDetails.name} added sucessfully`);
-      setSucessfull(true);
-      dispatch(addNewCollection(collectionDetails));
-      setModal();
     }
     if (formvalid && collection) {
       setSucessMessage(`${collectionDetails.name} updated sucessfully`);
+    }
+    if (formvalid) {
       setSucessfull(true);
       dispatch(updateCollection(collectionDetails));
       setModal();

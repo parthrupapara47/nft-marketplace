@@ -11,6 +11,13 @@ export enum WearableBodyShape {
     BASE_FEMALE = "BaseFemale",
     BASE_MALE = "BaseMale"
 }
+
+export enum BodyShapeType {
+    BOTH = 'both',
+    MALE = 'male',
+    FEMALE = 'female'
+}
+
 export enum WearableCategory {
     EYEBROWS = 'eyebrows',
     EYES = 'eyes',

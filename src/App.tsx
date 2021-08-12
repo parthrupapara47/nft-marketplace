@@ -12,7 +12,7 @@ import { Browse } from "./component/Browse";
 import { SignInPage } from "./component/SignIn";
 import NftPage from "./component/NftPage/NftPage";
 import "./App.css";
-import { xinfinWallet } from "./modules/action/xinfinWallet";
+import { xinfinWallet, _xinfinWallet } from "./modules/action/xinfinWallet";
 import { useDispatch, useSelector } from "react-redux";
 import { NFTBuy } from "./component/NFTBuy";
 import { WalletState } from "./modules/reducers/xinfinWallet";
@@ -38,7 +38,15 @@ const App: React.FC = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
   useEffect(() => {
-    if (!wallet.isConnected) dispatch(xinfinWallet());
+    if (!wallet.isConnected) {
+      dispatch(
+        _xinfinWallet({
+          isConnecting: true,
+          chainId: null,
+        })
+      );
+      dispatch(xinfinWallet());
+    }
   }, []);
 
   return (

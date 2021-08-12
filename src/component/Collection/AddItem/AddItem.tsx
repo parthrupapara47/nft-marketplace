@@ -1,7 +1,15 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useParams, useHistory, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Back, Button, DropdownProps, SelectField } from "decentraland-ui";
+import {
+  Back,
+  Button,
+  DropdownProps,
+  Header,
+  Row,
+  Section,
+  SelectField,
+} from "decentraland-ui";
 import { Navbar } from "../../Navbar";
 import { Field } from "decentraland-ui";
 import {
@@ -17,12 +25,13 @@ import "./AddItem.css";
 import { Footer } from "../../Footer";
 import { WalletProvider } from "../../WalletProvider";
 import { MaxFileSize } from "../../../modules/utilis";
+import { BodyShapeType } from "../../../modules/nft/types";
 
 const AddItem: React.FC = () => {
   const [itemsList, setItemsList] = useState<any>({});
   const [sucess, setSucess] = useState<boolean>(false);
   const [newItem, setNewitem] = useState<NEW_ITEM | any>(defaultValue);
-  const [errorList, setErrorList] = useState<any>(defaultError);
+  const [filesizeError, setFilesizeError] = useState<boolean>(false);
   const { itemId } = useParams<{ itemId: string }>();
   const histrory = useHistory();
   const getItems = useSelector(
@@ -38,12 +47,11 @@ const AddItem: React.FC = () => {
   }, [itemId, getItems]);
 
   const onFieldChange = (e?: any) => {
-    setErrorList({ ...errorList, [e.target.name]: false });
     setNewitem({ ...newItem, [e.target.name]: e.target.value });
   };
 
   const onFileChange = (e: any) => {
-    setErrorList({ ...errorList, file: false, maxSize: false });
+    setFilesizeError(false);
     const file = e.target.files;
     if (file && file.length > 0) {
       const fileSize = e.target.files[0].size;
@@ -53,7 +61,7 @@ const AddItem: React.FC = () => {
           file: file[0],
         });
       } else if (fileSize > MaxFileSize) {
-        setErrorList({ ...errorList, maxSize: true });
+        setFilesizeError(true);
         setNewitem({
           ...newItem,
           file: "",
@@ -67,49 +75,49 @@ const AddItem: React.FC = () => {
     }
   };
 
+  const renderRepresentation = (type: BodyShapeType) => {
+    const { bodyShape } = newItem;
+    return (
+      <div
+        className={`option has-icon ${type} ${
+          type === bodyShape ? "active" : ""
+        }`.trim()}
+        onClick={() =>
+          setNewitem({
+            ...newItem,
+            bodyShape: type,
+          })
+        }
+      >
+        {type}
+      </div>
+    );
+  };
+
   const modalSucessfull = useCallback(() => {
     setSucess(false);
     setNewitem(defaultValue);
   }, []);
 
+  const valid = () => {
+    const { name, externalLink, description, file, rarity, bodyShape } =
+      newItem;
+
+    const required = [name, externalLink, description, file, rarity, bodyShape];
+
+    return required.every((field) => field !== "");
+  };
+
   const submitForm = (e: React.FormEvent) => {
     e.preventDefault();
-    let err: any = {};
-    let formvalid: boolean = true;
-    if (newItem.name === "") {
-      err.name = true;
-      formvalid = false;
-    }
-    if (newItem.externalLink === "") {
-      err.externalLink = true;
-      formvalid = false;
-    }
-    if (newItem.description === "") {
-      err.description = true;
-      formvalid = false;
-    }
-    if (newItem.category === "") {
-      err.category = true;
-      formvalid = false;
-    }
-    if (newItem.category === "wearable") {
-      if (newItem.file === "") {
-        err.file = true;
-        formvalid = false;
-      }
-      if (newItem.rarity === "") {
-        err.rarity = true;
-        formvalid = false;
-      }
-    }
-    setErrorList(err);
-    if (formvalid) {
+
+    if (valid()) {
       setSucess(true);
     }
   };
 
   return (
-    <div className="additem">
+    <div className="additem CreateItemModal">
       <Navbar />
       <WalletProvider>
         <div className="topbar">
@@ -119,30 +127,18 @@ const AddItem: React.FC = () => {
         </div>
         <div className="headermenu">
           <Back onClick={() => histrory.push(`/collection/${itemId}`)} />
-          <label>back to {itemsList.name}</label>
+          <label>
+            {"back to"} {itemsList.name}
+          </label>
           <div className="createnew">
-            <h2>Create New Item</h2>
+            <h2>{"Create New Item"}</h2>
             <form onSubmit={(e) => submitForm(e)} className="field">
-              <SelectField
-                label="Caregory"
-                placeholder="Select Item Category"
-                value={newItem.category}
-                options={dropdownOptions}
-                error={errorList.category}
-                onChange={(e: any, value: DropdownProps) =>
-                  setNewitem({
-                    ...newItem,
-                    category: value.value,
-                  })
-                }
-              />
               <Field
                 name="name"
                 label="Name"
                 placeholder="Test 1-(i)"
                 value={newItem.name}
                 onChange={(e) => onFieldChange(e)}
-                error={errorList.name}
               />
               <Field
                 name="externalLink"
@@ -150,7 +146,6 @@ const AddItem: React.FC = () => {
                 placeholder=""
                 value={newItem.externalLink}
                 onChange={(e) => onFieldChange(e)}
-                error={errorList.externalLink}
               />
               <Field
                 name="description"
@@ -158,37 +153,44 @@ const AddItem: React.FC = () => {
                 placeholder=""
                 value={newItem.description}
                 onChange={(e) => onFieldChange(e)}
-                error={errorList.description}
               />
 
-              {newItem.category === "wearable" ? (
-                <>
-                  <Field
-                    label={file.label}
-                    name={file.name}
-                    type={file.type}
-                    accept={file.accept}
-                    onChange={(e) => onFileChange(e)}
-                    error={errorList.file || errorList.maxSize}
-                    message={errorList.maxSize ? "The max size 2MB" : undefined}
-                  />
-                  <SelectField
-                    label={"How rare is this item?"}
-                    placeholder={"Select a rarity"}
-                    value={newItem.rarity}
-                    options={rarityOptation}
-                    error={errorList.rarity}
-                    onChange={(e: any, value: DropdownProps) =>
-                      setNewitem({
-                        ...newItem,
-                        rarity: value.value,
-                      })
-                    }
-                  />
-                </>
-              ) : null}
-              <Button type="submit" primary onClick={(e) => submitForm(e)}>
-                Create
+              <Field
+                label={file.label}
+                name={file.name}
+                type={file.type}
+                accept={file.accept}
+                onChange={(e) => onFileChange(e)}
+                error={filesizeError}
+                message={filesizeError ? "The max size 2MB" : undefined}
+              />
+              <Section>
+                <Header sub>{"Select the body shape for your item"}</Header>
+                <Row>
+                  {renderRepresentation(BodyShapeType.BOTH)}
+                  {renderRepresentation(BodyShapeType.MALE)}
+                  {renderRepresentation(BodyShapeType.FEMALE)}
+                </Row>
+              </Section>
+              <SelectField
+                label={"How rare is this item?"}
+                placeholder={"Select a rarity"}
+                value={newItem.rarity}
+                options={rarityOptation}
+                onChange={(e: any, value: DropdownProps) =>
+                  setNewitem({
+                    ...newItem,
+                    rarity: value.value,
+                  })
+                }
+              />
+              <Button
+                type="submit"
+                primary
+                onClick={(e) => submitForm(e)}
+                disabled={!valid()}
+              >
+                {"Create"}
               </Button>
             </form>
           </div>

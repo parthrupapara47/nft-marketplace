@@ -23,8 +23,11 @@ const WalletProvider = (props: Props) => {
   });
   return (
     <>
+      {wallet.isConnecting ? (
+        <Loader active size="huge" inline="centered" />
+      ) : null}
       {!wallet.isConnected && !wallet.isConnecting ? <NotConnected /> : null}
-      {wallet.isConnected || wallet.isConnecting ? children : null}
+      {wallet.isConnected && !wallet.isConnecting ? children : null}
     </>
   );
 };

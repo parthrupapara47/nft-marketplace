@@ -15,7 +15,7 @@ const SignInPage: React.FC = () => {
   });
   const { isConnected, eth, isConnecting } = wallet;
 
-  const connectWallet = async () => {
+  const connectWallet = () => {
     dispatch(
       _xinfinWallet({
         isConnecting: true,
@@ -23,11 +23,14 @@ const SignInPage: React.FC = () => {
       })
     );
     dispatch(xinfinWallet());
-    if (!isConnected && !isConnecting) {
-      setModelOpen(true);
-    } else {
-      setModelOpen(false);
-    }
+
+    setTimeout(() => {
+      if (!isConnected && !isConnecting) {
+        setModelOpen(true);
+      } else {
+        setModelOpen(false);
+      }
+    }, 1000);
   };
 
   const closeModel = useCallback(() => {

@@ -81,9 +81,9 @@ const Home: React.FC = () => {
       <Page className="HomePage">
         <SlideShow nfts={nftWearable} title="Wearable" link="wearable" />
 
-        <SlideShow nfts={nftLand} title="Parcels and Estates" link="parcel" />
+        {/* <SlideShow nfts={nftLand} title="Parcels and Estates" link="parcel" />
 
-        <SlideShow nfts={nftEns} title="Name" link="ens" />
+        <SlideShow nfts={nftEns} title="Name" link="ens" /> */}
       </Page>
       <Footer />
     </div>

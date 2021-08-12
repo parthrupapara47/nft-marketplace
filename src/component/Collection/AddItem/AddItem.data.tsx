@@ -9,8 +9,8 @@ export const defaultValue: NEW_ITEM = {
   externalLink: "",
   description: "",
   file: "",
-  category: "",
   rarity: "",
+  bodyShape: "",
 };
 
 export interface NEW_ITEM {
@@ -18,8 +18,8 @@ export interface NEW_ITEM {
   externalLink: string;
   description: string;
   file: File | string;
-  category: any;
   rarity: string;
+  bodyShape: string;
 }
 
 export const defaultError = {
@@ -27,7 +27,6 @@ export const defaultError = {
   externalLink: false,
   description: false,
   file: false,
-  category: false,
   maxSize: false,
   rarity: false,
 };
@@ -44,7 +43,7 @@ export const dropdownOptions = [
   { value: Category.WEARABLE, text: "Wereable" },
   // { value: Category.ESTATE, text: "Estate" },
   // { value: Category.PARCEL, text: "Parcel" },
-  { value: Category.ENS, text: "Name" },
+  // { value: Category.ENS, text: "Name" },
 ];
 
 export const rarityOptation = [
