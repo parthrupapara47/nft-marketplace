@@ -50,32 +50,6 @@ const Nftcard: React.FC<Props> = (props: Props) => {
             )}
           </div>
         ) : null}
-        {nft.category === "parcel" ? (
-          <>
-            <div className="ParcelTags tags">
-              <div className="coords">
-                <div className="pin" />
-                {nft.searchParcelX},{nft.searchParcelY}
-              </div>
-            </div>
-          </>
-        ) : null}
-        {nft.category === "estate" ? (
-          <>
-            <div className="EstateTags tags">
-              <div className="size">
-                {nft.estate?.parcels?.length} {"LAND"}
-              </div>
-            </div>
-          </>
-        ) : null}
-        {nft.category === "ens" ? (
-          <>
-            <div className="ENSTags tags">
-              <div className="badge">Name</div>
-            </div>
-          </>
-        ) : null}
       </Card.Content>
     </Card>
   );

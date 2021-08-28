@@ -1,6 +1,6 @@
-type initalstate = { collectionList: any };
+type CollectionState = { collectionList: any };
 
-const collectionState: initalstate = {
+const collectionState: CollectionState = {
   collectionList: [
     {
       id: 1,

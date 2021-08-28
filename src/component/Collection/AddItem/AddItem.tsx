@@ -14,11 +14,10 @@ import { Navbar } from "../../Navbar";
 import { Field } from "decentraland-ui";
 import {
   defaultValue,
-  defaultError,
   file,
-  dropdownOptions,
   NEW_ITEM,
   rarityOptation,
+  categoryOptation,
 } from "./AddItem.data";
 import { ModalSucessfull } from "../../ModalSucessfull";
 import "./AddItem.css";
@@ -100,10 +99,25 @@ const AddItem: React.FC = () => {
   }, []);
 
   const valid = () => {
-    const { name, externalLink, description, file, rarity, bodyShape } =
-      newItem;
+    const {
+      name,
+      externalLink,
+      description,
+      file,
+      rarity,
+      bodyShape,
+      category,
+    } = newItem;
 
-    const required = [name, externalLink, description, file, rarity, bodyShape];
+    const required = [
+      name,
+      externalLink,
+      description,
+      file,
+      rarity,
+      bodyShape,
+      category,
+    ];
 
     return required.every((field) => field !== "");
   };
@@ -159,7 +173,7 @@ const AddItem: React.FC = () => {
                 label={file.label}
                 name={file.name}
                 type={file.type}
-                accept={file.accept}
+                accept="image/*"
                 onChange={(e) => onFileChange(e)}
                 error={filesizeError}
                 message={filesizeError ? "The max size 2MB" : undefined}
@@ -181,6 +195,18 @@ const AddItem: React.FC = () => {
                   setNewitem({
                     ...newItem,
                     rarity: value.value,
+                  })
+                }
+              />
+              <SelectField
+                label={"What's the category of this item?"}
+                placeholder={"Select a category"}
+                value={newItem.category}
+                options={categoryOptation}
+                onChange={(e: any, value: DropdownProps) =>
+                  setNewitem({
+                    ...newItem,
+                    category: value.value,
                   })
                 }
               />

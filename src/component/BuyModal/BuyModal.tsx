@@ -35,14 +35,14 @@ const BuyModal: React.FC<Props> = (props: Props) => {
   } else if (isInsufficientMANA) {
     subtitle = (
       <>
-        {`You don't have enough MANA to buy ${getNFTName(nft)} for`}
+        {`You don't have enough MANA to buy ${getNFTName(nft)} for `}
         <Price price={priceInEth} />.
       </>
     );
   } else {
     subtitle = (
       <>
-        {`You are about to buy ${getNFTName(nft)} for`}
+        {`You are about to buy ${getNFTName(nft)} for `}
         <Price price={priceInEth} />.
       </>
     );

@@ -1,6 +1,6 @@
 import {
   Category,
-  RARITY_TITLE,
+  WearableCategory,
   WearableRarity,
 } from "../../../modules/nft/types";
 
@@ -11,6 +11,7 @@ export const defaultValue: NEW_ITEM = {
   file: "",
   rarity: "",
   bodyShape: "",
+  category: "",
 };
 
 export interface NEW_ITEM {
@@ -20,6 +21,7 @@ export interface NEW_ITEM {
   file: File | string;
   rarity: string;
   bodyShape: string;
+  category: string;
 }
 
 export const defaultError = {
@@ -29,6 +31,7 @@ export const defaultError = {
   file: false,
   maxSize: false,
   rarity: false,
+  category: false,
 };
 
 export const file = {
@@ -39,12 +42,7 @@ export const file = {
     ".pdf, .mkv, .mp4, .webm, .imge, .jpeg, .jpg, .mov, .png, .3ds, .fbx, .dae, .stp, .obj",
 };
 
-export const dropdownOptions = [
-  { value: Category.WEARABLE, text: "Wereable" },
-  // { value: Category.ESTATE, text: "Estate" },
-  // { value: Category.PARCEL, text: "Parcel" },
-  // { value: Category.ENS, text: "Name" },
-];
+export const dropdownOptions = [{ value: Category.WEARABLE, text: "Wereable" }];
 
 export const rarityOptation = [
   { value: WearableRarity.COMMON, text: "Common" },
@@ -54,4 +52,10 @@ export const rarityOptation = [
   { value: WearableRarity.MYTHIC, text: "Mythic" },
   { value: WearableRarity.RARE, text: "Rare" },
   { value: WearableRarity.UNCOMMON, text: "Uncommon" },
+];
+
+export const categoryOptation = [
+  { value: WearableCategory.EYEBROWS, text: "Eyebrows" },
+  { value: WearableCategory.EYES, text: "Eyes" },
+  { value: WearableCategory.MOUTH, text: "Mouth" },
 ];

@@ -67,20 +67,8 @@ export function getNFTName(nft: NFT) {
   }
 
   switch (nft.category) {
-    case Category.PARCEL:
-      return "Parcel";
-
-    case Category.ESTATE:
-      return "Estate";
-
     case Category.WEARABLE:
       return "Werable";
-
-    case Category.ENS:
-      return "Name";
-
-    case "art":
-      return "Art";
 
     default:
       return "NFT";

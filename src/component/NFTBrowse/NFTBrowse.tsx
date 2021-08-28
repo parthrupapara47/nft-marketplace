@@ -2,7 +2,6 @@ import { useQuery } from "@apollo/client";
 import {
   Button,
   Card,
-  Container,
   Dropdown,
   DropdownProps,
   Header,
@@ -10,16 +9,13 @@ import {
   Page,
   Radio,
   Responsive,
-  Tabs,
 } from "decentraland-ui";
-import { useCallback, useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
-import { nft, nfts } from "../../graphql/decentraland";
-import { Navbar } from "../Navbar";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { nfts } from "../../graphql/decentraland";
 import { NftCard } from "../NftCard";
 import { sideMenuData } from "../Browse/Browse.data";
 import { NFT } from "../../modules/nft/types";
-import { Footer } from "../Footer";
 import { getMaxQuerySize, MAX_PAGE, VendorName } from "../../modules/utilis";
 
 enum SortBy {
@@ -42,7 +38,6 @@ interface Props {
 
 const NFTBrowse: React.FC<Props> = (props: Props) => {
   const { category } = useParams<{ category: string }>();
-  const history = useHistory();
   const [NftList, setNftList] = useState<Array<NFT>>([]);
   const [selectedValue, setSelectedValue] = useState<any>(category || "all");
   const [serchValue, setSerchValue] = useState<string>("");
@@ -62,10 +57,6 @@ const NFTBrowse: React.FC<Props> = (props: Props) => {
       orderDirection: dropDownValue === SortBy.CHEAPEST ? "asc" : "desc",
       where: {
         owner: props.address,
-        // category:
-        //   selectedValue !== undefined && selectedValue !== "all"
-        //     ? selectedValue
-        //     : undefined,
         category: "wearable",
         name_contains: debounceValue,
         updatedAt_gt: 1,
@@ -77,7 +68,7 @@ const NFTBrowse: React.FC<Props> = (props: Props) => {
   useEffect(() => {
     setLoadNft(initPageNo);
     setLoadding(true);
-  }, [category, debounceValue, onSale]);
+  }, [category, debounceValue, onSale, dropDownValue]);
 
   useEffect(() => {
     if (decentralandData.data !== undefined && loadNft.pageNo === 1) {
@@ -107,7 +98,7 @@ const NFTBrowse: React.FC<Props> = (props: Props) => {
     return () => {
       clearTimeout(timerId);
     };
-  }, [serchValue]);
+  }, [serchValue, debounceValue]);
 
   useEffect(() => {
     if (!onSale) setDropDownValue(SortBy.NEWEST);
@@ -118,9 +109,6 @@ const NFTBrowse: React.FC<Props> = (props: Props) => {
     switch (value) {
       case "all":
       case "wearable":
-      case "parcel":
-      case "estate":
-      case "ens":
         return setSelectedValue(value);
       default:
         break;

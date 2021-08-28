@@ -3,6 +3,7 @@ import { formatDistanceToNow } from "date-fns";
 import dateFnsFormat from "date-fns/format";
 import { Header, Mana, Profile, Responsive, Table } from "decentraland-ui";
 import { NFT } from "../../modules/nft/types";
+import { Link } from "react-router-dom";
 
 type Props = {
   nft: NFT;
@@ -44,18 +45,18 @@ const TransactionHistory: React.FC<Props> = (props: Props) => {
                 {orders.map((event, index) => (
                   <Table.Row key={index}>
                     <Table.Cell>
-                      <a>
+                      <Link to={`/accounts/${event.owner}`}>
                         <Profile address={event.owner} />
-                      </a>
+                      </Link>
                     </Table.Cell>
                     <Table.Cell>
-                      <a>
-                        {event.buyer !== null ? (
+                      {event.buyer !== null ? (
+                        <Link to={`/accounts/${event.buyer}`}>
                           <Profile address={event.buyer} />
-                        ) : (
-                          "Null"
-                        )}
-                      </a>
+                        </Link>
+                      ) : (
+                        "Null"
+                      )}
                     </Table.Cell>
                     <Table.Cell title={formatDateTitle(event.updatedAt)}>
                       {formatEventDate(event.updatedAt)}

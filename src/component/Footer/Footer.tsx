@@ -1,5 +1,5 @@
 import React from "react";
-import { Footer as BaseFooter, LanguageDropdown } from "decentraland-ui";
+import { LanguageDropdown } from "decentraland-ui";
 
 const Footer: React.FC = () => {
   return (
@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
           locale="en"
           direction="right"
           upward
-          locales={["en", "es", "fr"]}
+          locales={["en"]}
         />
         <div className="links">
           <a>Home</a>

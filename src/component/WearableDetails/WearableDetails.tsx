@@ -114,7 +114,7 @@ const WearableDetails: React.FC<Props> = (props: Props) => {
                   )}
                 </div>
               </div>
-              <Bids nft={nft} />
+              {/* <Bids nft={nft} /> */}
               <TransactionHistory nft={nft} />
             </Container>
           </div>

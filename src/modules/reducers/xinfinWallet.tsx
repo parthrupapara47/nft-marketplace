@@ -5,15 +5,17 @@ export type WalletState = {
   isConnecting: boolean;
   eth: boolean | null;
   chainId: number | null;
+  signature: string | null;
 };
 
-const WalletState: WalletState = {
+const walletState: WalletState = {
   accounts: "",
   balance: "",
   isConnected: false,
   isConnecting: false,
   eth: null,
   chainId: null,
+  signature: null,
 };
 
 type Action = {
@@ -21,12 +23,12 @@ type Action = {
   payload: any;
 };
 
-const xinfinWallet = (state = WalletState, action: Action) => {
+const xinfinWallet = (state = walletState, action: Action) => {
   switch (action.type) {
     case "WALLET":
       return { ...state, ...action.payload };
     case "WALLET_LOGOUT":
-      return WalletState;
+      return walletState;
     default:
       return state;
   }

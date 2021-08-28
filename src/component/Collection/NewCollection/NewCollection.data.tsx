@@ -10,9 +10,18 @@ export interface FORM {
   image: string | ArrayBuffer | null;
 }
 
-export const errorForm = {
+export const errorForm: ErrorForm = {
   name: false,
   description: false,
   file: false,
   maxSize: false,
+  image: false,
+};
+
+export type ErrorForm = {
+  name: boolean;
+  description: boolean;
+  file: boolean;
+  maxSize: boolean;
+  image: boolean;
 };

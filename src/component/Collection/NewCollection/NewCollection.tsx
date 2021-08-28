@@ -1,12 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
-import {
-  addNewCollection,
-  updateCollection,
-} from "../../../modules/action/collection";
+import { updateCollection } from "../../../modules/action/collection";
 import { useDispatch } from "react-redux";
 import { Modal, Field, Button } from "decentraland-ui";
 import { ModalSucessfull } from "../../ModalSucessfull";
-import { form, errorForm, FORM } from "./NewCollection.data";
+import { form, errorForm, FORM, ErrorForm } from "./NewCollection.data";
 import "./NewCollection.css";
 import { MaxFileSize } from "../../../modules/utilis";
 
@@ -21,7 +18,7 @@ const NewCollection: React.FC<Props> = (props: Props) => {
   const [open, setOpen] = useState(false);
   const [sucessfull, setSucessfull] = useState(false);
   const [collectionDetails, setcollectionDetails] = useState<FORM | any>(form);
-  const [formError, setFormError] = useState<any>(errorForm);
+  const [formError, setFormError] = useState<ErrorForm>(errorForm);
   const [sucessMessage, setSucessMessage] = useState<string>("");
   const dispatch = useDispatch();
 
@@ -36,7 +33,7 @@ const NewCollection: React.FC<Props> = (props: Props) => {
   const modalSucessfull = useCallback(() => {
     setSucessfull(false);
     !collection && setcollectionDetails(form);
-  }, []);
+  }, [collection]);
 
   const closeModal = () => {
     setModal();
@@ -60,7 +57,7 @@ const NewCollection: React.FC<Props> = (props: Props) => {
       if (fileSize < MaxFileSize) {
         setFormError({ ...formError, maxSize: false });
         var reader = new FileReader();
-        var url = reader.readAsDataURL(file[0]);
+        reader.readAsDataURL(file[0]);
 
         reader.onloadend = function (e: any) {
           setcollectionDetails({
@@ -137,11 +134,15 @@ const NewCollection: React.FC<Props> = (props: Props) => {
             type="file"
             accept="image/*"
             onChange={(e) => onImageChange(e)}
-            error={formError.image || formError.maxSiz}
+            error={formError.image || formError.maxSize}
             message={formError.maxSize ? "The max size 2MB" : undefined}
           />
           {collectionDetails.image !== null ? (
-            <img src={collectionDetails.image} className="imagepreview" />
+            <img
+              src={collectionDetails.image}
+              className="imagepreview"
+              alt={""}
+            />
           ) : null}
         </Modal.Content>
         <Modal.Actions>

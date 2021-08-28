@@ -7,16 +7,4 @@ export const sideMenuData = [
     label: "wearable",
     name: "wearable",
   },
-  // {
-  //   label: "parcel",
-  //   name: "parcel",
-  // },
-  // {
-  //   label: "estate",
-  //   name: "estate",
-  // },
-  // {
-  //   label: "Name",
-  //   name: "ens",
-  // },
 ];
