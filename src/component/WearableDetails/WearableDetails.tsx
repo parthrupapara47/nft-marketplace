@@ -32,7 +32,7 @@ const WearableDetails: React.FC<Props> = (props: Props) => {
                       {getNFTName(nft)}
                       <Popup
                         position="top center"
-                        content={RARITY_TITLE[nft.wearable.rarity]}
+                        content={RARITY_TITLE.epic}
                         trigger={
                           <div
                             className="rarity"
@@ -41,14 +41,14 @@ const WearableDetails: React.FC<Props> = (props: Props) => {
                                 RARITY_COLOR[nft.searchWearableRarity],
                             }}
                           >
-                            {nft.wearable.rarity}
+                            {"wearable"}
                           </div>
                         }
                       />
                     </div>
                   </Header>
                 </div>
-                <div className="Column right">
+                {nft.owner && <div className="Column right">
                   <div className="Owner">
                     <Link to={`/accounts/${nft.owner.address}`}>
                       <label>Owner</label>
@@ -61,9 +61,9 @@ const WearableDetails: React.FC<Props> = (props: Props) => {
                       </div>
                     </Link>
                   </div>
-                </div>
+                </div>}
               </div>
-              {nft.wearable.description !== "" ? (
+              {nft.wearable && nft.wearable.description !== "" ? (
                 <div className="Description">
                   <Header sub>Description</Header>
                   <div className="description-text">
@@ -71,11 +71,11 @@ const WearableDetails: React.FC<Props> = (props: Props) => {
                   </div>
                 </div>
               ) : null}
-              <OrderDetails nft={nft} />
+              {nft.owner && <OrderDetails nft={nft} />}
               <div className="Highlights">
                 <Header sub>Highlights</Header>
                 <div className="Row ">
-                  <div className="Column left Highlight clickable">
+                  {nft.searchWearableCategory && <div className="Column left Highlight clickable">
                     <div className="Row ">
                       <div className="Column left">
                         <div className={nft.searchWearableCategory}></div>
@@ -84,34 +84,36 @@ const WearableDetails: React.FC<Props> = (props: Props) => {
                         <div className="name">{nft.searchWearableCategory}</div>
                       </div>
                     </div>
-                  </div>
-                  {isUnisex(nft.searchWearableBodyShapes) ? (
-                    <div className="Column left Highlight clickable">
-                      <div className="Row ">
-                        <div className="Column left">
-                          <div className="Unisex" />
-                        </div>
-                        <div className="Column right">
-                          <div className="name">Unisex</div>
-                        </div>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="Column left Highlight clickable">
-                      <div className="Row ">
-                        <div className="Column left">
-                          <div
-                            className={nft.searchWearableBodyShapes[0]}
-                          ></div>
-                        </div>
-                        <div className="Column right">
-                          <div className="name">
-                            {nft.searchWearableBodyShapes[0]}
+                  </div>}
+                  {
+                    nft.searchWearableBodyShapes ? isUnisex(nft.searchWearableBodyShapes) ? (
+                      <div className="Column left Highlight clickable">
+                        <div className="Row ">
+                          <div className="Column left">
+                            <div className="Unisex" />
+                          </div>
+                          <div className="Column right">
+                            <div className="name">Unisex</div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  )}
+                    ) : (
+                      <div className="Column left Highlight clickable">
+                        <div className="Row ">
+                          <div className="Column left">
+                            <div
+                              className={nft.searchWearableBodyShapes[0]}
+                            ></div>
+                          </div>
+                          <div className="Column right">
+                            <div className="name">
+                              {nft.searchWearableBodyShapes[0]}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ) : null
+                  }
                 </div>
               </div>
               {/* <Bids nft={nft} /> */}

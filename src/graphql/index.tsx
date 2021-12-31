@@ -27,7 +27,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 const link = from([
   errorLink,
   new HttpLink({
-    uri: "http://13.233.101.71:8000/subgraphs/name/hansrajrami/erc721",
+  uri:"https://graph-node-apothem.yodaplus.net:8000/subgraphs/name/rknft2"
   }),
 ]);
 
@@ -39,7 +39,7 @@ const decentralandLink = from([
 ]);
 
 export const client = new ApolloClient({
-  //   uri: "http://13.233.101.71:8000/subgraphs/name/hansrajrami/erc721",
   cache: new InMemoryCache(),
-  link: decentralandLink,
+  // link: decentralandLink,
+  link:link
 });

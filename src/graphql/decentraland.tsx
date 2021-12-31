@@ -1,14 +1,14 @@
 import { gql } from "@apollo/client";
 
 export const nfts = gql`
-  query nfts(
-    $first: Int = 50
+  query nftdatas(
+    $first: Int = 100
     $skip: Int = 0
-    $where: NFT_filter
-    $orderBy: NFT_orderBy = updatedAt
+    $where: NFTData_filter
+    $orderBy: NFTData_orderBy = updatedAt
     $orderDirection: OrderDirection = asc
   ) {
-    nfts(
+    nftdatas(
       skip: $skip
       first: $first
       orderBy: $orderBy
@@ -16,78 +16,23 @@ export const nfts = gql`
       where: $where
     ) {
       id
-      tokenId
-      contractAddress
-      category
-      owner
+      _tokenId
+      nftAddress
+      _by
       tokenURI
+      activeOrder
       name
       image
-      parcel {
-        id
-        tokenId
-        owner
-        x
-        y
-        estate
-        data
-        rawData
-        nft
-      }
-      estate {
-        parcels {
-          x
-          y
-        }
-      }
-      wearable {
-        id
-        owner
-        representationId
-        collection
-        name
-        description
-        category
-        rarity
-        bodyShapes
-      }
-      ens
       createdAt
       updatedAt
       searchOrderStatus
       searchOrderPrice
       searchOrderExpiresAt
       searchOrderCreatedAt
-      searchIsLand
       searchText
-      searchParcelIsInBounds
-      searchParcelX
-      searchParcelY
-      searchParcelEstateId
-      searchEstateSize
-      searchIsWearableHead
-      searchIsWearableAccessory
-      searchWearableRarity
-      searchWearableCategory
-      searchWearableBodyShapes
-    }
-  }
-`;
-
-export const nft = gql`
-  query nft($id: ID!) {
-    nft(id: $id) {
-      id
-      tokenId
-      contractAddress
-      category
-      owner {
-        address
-      }
-      tokenURI
       orders {
         id
-        category
+        nft
         nftAddress
         tokenId
         txHash
@@ -100,17 +45,39 @@ export const nft = gql`
         createdAt
         updatedAt
       }
-      bids {
+    }
+  }
+`;
+
+
+
+export const nft = gql`
+  query nftdata($id: ID!) {
+    nftdata(id: $id) {
+      id
+      _tokenId
+      nftAddress
+      _by
+      tokenURI
+      name
+      image
+      createdAt
+      updatedAt
+      searchOrderStatus
+      searchOrderPrice
+      searchOrderExpiresAt
+      searchOrderCreatedAt
+      searchText
+      orders {
         id
-        category
+        nft
         nftAddress
         tokenId
-        bidder
-        seller
+        txHash
+        owner
+        buyer
         price
-        fingerprint
         status
-        blockchainId
         blockNumber
         expiresAt
         createdAt
@@ -118,7 +85,6 @@ export const nft = gql`
       }
       activeOrder {
         id
-        category
         nft
         nftAddress
         tokenId
@@ -132,60 +98,6 @@ export const nft = gql`
         createdAt
         updatedAt
       }
-      name
-      image
-      parcel {
-        id
-        tokenId
-        owner
-        x
-        y
-        estate
-        data {
-          description
-        }
-        rawData
-        nft
-      }
-      estate {
-        parcels {
-          x
-          y
-        }
-        data {
-          description
-        }
-      }
-      wearable {
-        id
-        owner
-        representationId
-        collection
-        name
-        description
-        category
-        rarity
-        bodyShapes
-      }
-      ens
-      createdAt
-      updatedAt
-      searchOrderStatus
-      searchOrderPrice
-      searchOrderExpiresAt
-      searchOrderCreatedAt
-      searchIsLand
-      searchText
-      searchParcelIsInBounds
-      searchParcelX
-      searchParcelY
-      searchParcelEstateId
-      searchEstateSize
-      searchIsWearableHead
-      searchIsWearableAccessory
-      searchWearableRarity
-      searchWearableCategory
-      searchWearableBodyShapes
     }
   }
 `;

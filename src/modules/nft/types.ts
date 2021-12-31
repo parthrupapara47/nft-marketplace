@@ -215,4 +215,5 @@ export type NFT = {
     searchWearableRarity: WearableRarity
     searchWearableCategory: WearableCategory
     searchWearableBodyShapes: [WearableBodyShape]
+    nftAddress:string
 }

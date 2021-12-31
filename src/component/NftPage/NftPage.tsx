@@ -16,7 +16,7 @@ const NftPage: React.FC = () => {
 
   useEffect(() => {
     if (typeof nftDetails.data !== "undefined") {
-      setNftData(nftDetails.data.nft);
+      setNftData(nftDetails.data.nftdata);
     }
   }, [nftDetails, id]);
 
@@ -30,13 +30,8 @@ const NftPage: React.FC = () => {
           <>
             {nftData === null ? (
               <NotFound />
-            ) : (
-              <>
-                {nftData.category === "wearable" ? (
-                  <WearableDetails nft={nftData} />
-                ) : null}
-              </>
-            )}
+            ) : <WearableDetails nft={nftData} />
+            }
           </>
         )}
       </Page>

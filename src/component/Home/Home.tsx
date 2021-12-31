@@ -17,16 +17,15 @@ const Home: React.FC = () => {
     variables: {
       first: 15,
       where: {
-        category: "wearable",
         updatedAt_gt: 1,
-        searchOrderStatus: "open",
+        // searchOrderStatus: "",
       },
     },
   });
 
   useEffect(() => {
     if (getNftWearables.data !== undefined) {
-      setNftWearable(getNftWearables.data.nfts);
+      setNftWearable(getNftWearables.data.nftdatas);
     }
   }, [getNftWearables]);
 

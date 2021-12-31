@@ -22,7 +22,7 @@ const NFTBuy: React.FC = () => {
 
   useEffect(() => {
     if (typeof nftDetails.data !== "undefined") {
-      setNftData(nftDetails.data.nft);
+      setNftData(nftDetails.data.nftdata);
     }
   }, [nftDetails, id]);
   return (

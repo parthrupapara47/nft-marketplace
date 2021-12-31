@@ -1,10 +1,10 @@
 import { gql } from "@apollo/client";
 
 export const NFT = gql`
-  query nft($id: ID!, $block: Block_height) {
+  query nftdata($id: ID!, $block: Block_height) {
     nft(id: $id, block: $block) {
       id
-      tokenID
+      _tokenId
       owner
       tokenURI
     }
@@ -12,15 +12,15 @@ export const NFT = gql`
 `;
 
 export const NFTS = gql`
-  query nfts(
+  query nftdatas(
     $skip: Int
     $first: Int = 100
-    $orderBy: NFT_orderBy
+    $orderBy: NFTData_orderBy
     $orderDirection: OrderDirection
-    $where: NFT_filter
+    $where: NFTData_filter
     $block: Block_height
   ) {
-    nfts(
+    nftdatas(
       skip: $skip
       first: $first
       orderBy: $orderBy
@@ -29,7 +29,7 @@ export const NFTS = gql`
       block: $block
     ) {
       id
-      tokenID
+      _tokenId
       owner
       tokenURI
     }
@@ -41,10 +41,10 @@ export const ACCOUNT = gql`
     account(id: $id, block: $block) {
       id
       address
-      balance
     }
   }
 `;
+
 
 export const ACCOUNTS = gql`
   query accounts(
@@ -65,7 +65,6 @@ export const ACCOUNTS = gql`
     ) {
       id
       address
-      balance
     }
   }
 `;

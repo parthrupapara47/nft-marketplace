@@ -56,11 +56,11 @@ const NFTBrowse: React.FC<Props> = (props: Props) => {
       orderBy: dropDownValue,
       orderDirection: dropDownValue === SortBy.CHEAPEST ? "asc" : "desc",
       where: {
-        owner: props.address,
-        category: "wearable",
-        name_contains: debounceValue,
-        updatedAt_gt: 1,
-        searchOrderStatus: onSale ? "open" : undefined,
+        // owner: props.address,
+        // category: "wearable",
+        // name_contains: debounceValue,
+        // updatedAt_gt: 1,
+        // searchOrderStatus: onSale ? "open" : undefined,
       },
     },
   });
@@ -72,14 +72,14 @@ const NFTBrowse: React.FC<Props> = (props: Props) => {
 
   useEffect(() => {
     if (decentralandData.data !== undefined && loadNft.pageNo === 1) {
-      setNftList(decentralandData.data.nfts);
+      setNftList(decentralandData.data.nftdatas);
       setLoadding(false);
     } else if (
       decentralandData.data !== undefined &&
       NftList.length !== 0 &&
       loadNft.pageNo !== 1
     ) {
-      setNftList([...NftList, ...decentralandData.data.nfts]);
+      setNftList([...NftList, ...decentralandData.data.nftdatas]);
       setLoadNft({ ...loadNft, loadding: false });
     }
   }, [category, decentralandData, debounceValue]);
