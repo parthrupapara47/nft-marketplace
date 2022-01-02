@@ -1,5 +1,6 @@
+// export const marketPlaceContractAddress = "0x191ef416ee2a736578be1f6c31e7869d423ca807";
 export const marketPlaceContractAddress =
-  "0x191ef416ee2a736578be1f6c31e7869d423ca807";
+  "0xF53E4Ef250aB19116d6bdddffF739be24D0C37f8";
 
 export const marketPlaceAbi = [
   {
